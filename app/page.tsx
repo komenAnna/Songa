@@ -1,5 +1,5 @@
+import AboutUs from '@/components/NavBar/AboutUs'
 import Image from 'next/image'
-import { AboutUs } from '@/components'
 
 export default function Home() {
   return (
