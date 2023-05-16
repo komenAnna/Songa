@@ -6,7 +6,7 @@ export const Hero = () => {
     <div className='bg-brimary'>
         <div className='relative bg-primary h-[110vh]'>
         <div className="absolute top-0">
-                    <Image src="/assets/images/bike.png" className='h-ful' width={500} height={20} alt='motorcycle' />
+                    <Image src="/assets/images/bike.png" className='h-ful' width={200} height={20} alt='motorcycle' />
                 </div>
         <div className='flex h-full items-center justify-between text-white'>
             <div className=''>
