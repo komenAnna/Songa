@@ -8,35 +8,49 @@ export const NavBar = () => {
       {/* Mobile */}
       <div className='items-center flex justify-between px-5 md:hidden'>
         {/* Logo */}
-       <Link href="/">
-       <Image src="/assets/icons/logo.svg" alt="logo" width={85} height={85} />
-       </Link>
+        <Link href="/">
+          <div>
+            <Image src="/assets/icons/logo.svg" alt="logo" width={85} height={85} />
+          </div>
+        </Link>
         {/* Menu Icon */}
-        <Image src="/assets/icons/menu.svg" alt="logo" width={24} height={18} />
+        <button className="p-0 border-0 bg-transparent">
+          <Image src="/assets/icons/menu.svg" alt="menu" width={24} height={18} />
+        </button>
       </div>
 
       {/* Desktop */}
       <div className='md:block hidden h-auto bg-primary'>
         <div className='px-5 flex items-center justify-between'>
-        <Link href="/">
-          <Image src="/assets/icons/logo.svg" alt="logo" width={182} height={182} />
-        </Link>
-        <div className='text-white flex items-center justify-center space-x-5'>
-          <ul className='flex space-x-5'>
-            <li className='underline underline-offset-4'>
-              <Link href="/">Home</Link>
-            </li>
-            <li className='text-white/80'>
-              <Link href="/">Service</Link>
-            </li>
-            <li className='text-white/80'>
-              <Link href="/">Terms</Link>
-            </li>
-            <li className='text-white/80'>
-              <Link href="/">Contact Us</Link>
-            </li>
-          </ul>
-        </div>
+          <Link href="/">
+            <div>
+              <Image src="/assets/icons/logo.svg" alt="logo" width={182} height={182} />
+            </div>
+          </Link>
+          <div className='text-white flex items-center justify-center space-x-5'>
+            <ul className='flex space-x-5'>
+              <li className='underline underline-offset-4'>
+                <Link href="/">
+                  <div>Home</div>
+                </Link>
+              </li>
+              <li className='text-white/80'>
+                <Link href="/">
+                  <div>Service</div>
+                </Link>
+              </li>
+              <li className='text-white/80'>
+                <Link href="/">
+                  <div>Terms</div>
+                </Link>
+              </li>
+              <li className='text-white/80'>
+                <Link href="/">
+                  <div>Contact Us</div>
+                </Link>
+              </li>
+            </ul>
+          </div>
          {/* Social media icons */}
          <ul className='flex space-x-6'>
             <li>
@@ -46,17 +60,21 @@ export const NavBar = () => {
             </li>
             <li>
               <Link href="/">
-                <Image src="/assets/icons/social-media/twitter.svg" width={20} height={20} alt={'Facebook'} />
+                <div>
+                  <Image src="/assets/icons/social-media/twitter.svg" width={20} height={20} alt={'Facebook'} />
+                </div>
               </Link>
             </li>
             <li>
               <Link href="/">
-                <Image src="/assets/icons/social-media/insta.svg" width={20} height={20} alt={'Facebook'} />
+                <div>
+                  <Image src="/assets/icons/social-media/insta.svg" width={20} height={20} alt={'Facebook'} />
+                </div>
               </Link>
             </li>
           </ul>
         </div>
       </div>
-    </div>
+      </div>
   )
 }
