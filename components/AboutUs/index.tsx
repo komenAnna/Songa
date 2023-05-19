@@ -1,9 +1,16 @@
+import Image from 'next/image';
 import React from 'react';
 
 const AboutUs: React.FC = () => {
   return (
-    <div className="fixed bottom-4 left-4 w-1/4 flex items-center justify-end">
-      <div className="bg-222222 rounded-lg p-4 border border-red-500 text-white">
+    <div className="p-10 relative">
+      <div className='absolute '>
+        <Image src="/assets/icons/roads.png" fill={true} alt='Roads' />
+      </div>
+      <div className="z-60 absolute">
+      <div className="flex items-center justify-center">
+      <div className="w-[615 flex items-center justify-center">
+      <div className="bg-[#222222] rounded-lg p-4 border border-red-500 text-white w-[615px]">
         <h1 className="text-3xl font-bold mb-4">About Us</h1>
         <p>
           The BODABODA sector is one of the most important contributions to the Kenyan economy. On average, 8 Kenyans rely on one ride for their daily activities, totaling 22 million daily rides in Kenya.
@@ -26,11 +33,16 @@ const AboutUs: React.FC = () => {
           </svg>
         </button>
       </div>
-      <img
-        src="/assets/pngwing_2.jpg"
+      <Image
+        src="/assets/icons/pngwing.png"
         alt="About Us Image"
-        className="w-32 h-32 rounded-full ml-4"
+        width={515}
+        height={0}
+        className=""
       />
+    </div>
+      </div>
+      </div>
     </div>
   );
 };
