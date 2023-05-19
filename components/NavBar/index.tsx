@@ -38,10 +38,10 @@ export const NavBar = () => {
           </ul>
         </div>
          {/* Social media icons */}
-         <ul className='flex space-x-5'>
+         <ul className='flex space-x-6'>
             <li>
               <Link href="/">
-                <Image src="/assets/icons/social-media/facebook.svg" width={20} height={20} alt={'Facebook'} />
+                <Image className="h-[20px]"  src="/assets/icons/social-media/facebook.svg" width={20} height={20} alt={'Facebook'} />
               </Link>
             </li>
             <li>
