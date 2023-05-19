@@ -19,7 +19,7 @@ export const Hero = () => {
                     <h1 className='text-[40px] uppercase font-bold text-[#FF0000]'>Digitizing the</h1>
                     <h1 className='text-[40px] italic uppercase font-bold '>Bodaboda</h1>
                     <h1 className='text-[40px] italic uppercase font-bold text-[#009245]'>Industry</h1>
-                    <Image src="/assets/images/line.png" width={496} height={104} alt='logo' />
+                    <Image src="/assets/images/line.png" width={379.5} height={104} alt='logo' />
                 </div>
                 <p className="text-white text-[14px] w-[611px]">
                 The BODABODA sector is one of the most important contributions to the Kenyan economy. On average, 8 Kenyans rely on one ride for their daily activities, totaling 22 million daily rides in Kenya.
