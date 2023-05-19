@@ -3,7 +3,7 @@ import React from 'react';
 
 const AboutUs: React.FC = () => {
   return (
-    <div className="p-10 relative">
+    <div className="p-10 relative my-20">
       <div className='absolute '>
         <Image src="/assets/icons/roads.png" fill={true} alt='Roads' />
       </div>

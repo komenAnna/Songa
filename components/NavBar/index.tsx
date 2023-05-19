@@ -51,22 +51,6 @@ export const NavBar = () => {
               </li>
             </ul>
           </div>
-          {/* Social media icons */}
-          <ul className='flex space-x-5'>
-            <li className='underline underline-offset-4'>
-              <Link href="/">Home</Link>
-            </li>
-            <li className='text-white/80'>
-              <Link href="/">Service</Link>
-            </li>
-            <li className='text-white/80'>
-              <Link href="/">Terms</Link>
-            </li>
-            <li className='text-white/80'>
-              <Link href="/">Contact Us</Link>
-            </li>
-          </ul>
-        </div>
          {/* Social media icons */}
          <ul className='flex space-x-6'>
             <li>
@@ -91,6 +75,6 @@ export const NavBar = () => {
           </ul>
         </div>
       </div>
-    </div>
+      </div>
   )
 }
