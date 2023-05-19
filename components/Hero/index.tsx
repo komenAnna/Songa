@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
+import { ArrowSmallRightIcon } from '@heroicons/react/24/solid'
 
 export const Hero = () => {
   return (
@@ -24,7 +25,10 @@ export const Hero = () => {
                 The BODABODA sector is one of the most important contributions to the Kenyan economy. On average, 8 Kenyans rely on one ride for their daily activities, totaling 22 million daily rides in Kenya.
                 With 2 million registered boda riders in Kenya, this business produces Ksh. 370 million each day.
                 </p>
-                <button className='rounded-lg border-[#FF0000] w-[270px] h-[53px] border-2'>Learn more</button>
+                <button className='rounded-lg border-[#FB4552] w-[270px] h-[53px] border-2 flex items-center justify-center space-x-3'>Learn More
+
+                <ArrowSmallRightIcon className='h-5 w-5 text-[#FB4552] ml-2' />
+</button>
             </div>
         </div>
     </div>
