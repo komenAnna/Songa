@@ -1,7 +1,7 @@
-import AboutUs from '@/components/Landing/AboutUs'
-import { Hero } from '@/components'
+import AboutUs from '@/app/components/Landing/AboutUs'
+import { Hero } from '@/app/components'
 import Image from 'next/image'
-import RiderRegistration from '@/components/Landing/RiderRegistration'
+import RiderRegistration from '@/app/components/Landing/RiderRegistration'
 
 export default function Home() {
   return (
