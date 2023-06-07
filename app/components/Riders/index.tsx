@@ -5,11 +5,13 @@ import React, { FormEvent } from 'react'
 import RiderDetails from './Forms/RiderDetails'
 import Upload from './Forms/Upload'
 import Preview from './Preview'
+import BikeDetails from './Forms/BikeDetails'
 
 export default function RegistrationForm() {
   const { steps, currentStepIndex, step, isFirstStep, back, next, isLastStep } = useMultistepForm([
     <RiderDetails />,
     <Upload />,
+    <BikeDetails />,
     <Preview />
   ])
 

@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import FormWrapper from '../../Elements/Forms/FormWrapper';
 import 'react-phone-number-input/style.css';
 import PhoneInput from 'react-phone-number-input';
-import { parsePhoneNumberFromString, formatPhoneNumber } from 'libphonenumber-js';
+import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import Input from "react-phone-number-input/input"
+import FormInput from '../../Elements/Forms/FormInput';
 
 export default function RiderDetails() {
   const [phone, setPhone] = useState('');
@@ -40,14 +41,8 @@ export default function RiderDetails() {
 
   return (
     <FormWrapper title="Rider Details">
-      <div className='flex flex-col space-y-3'>
-        <label htmlFor="f_name">First Name</label>
-        <input type="text" name="First Name" className='bg-transparent border h-12 rounded-lg' />
-      </div>
-      <div className='flex flex-col space-y-3'>
-        <label htmlFor="l_name">Last Name</label>
-        <input type="text" name="First Name" className='bg-transparent border h-12 rounded-lg' />
-      </div>
+      <FormInput label='First Name' type='text' name='f_name' />
+      <FormInput label='Last Name' name='l_name' type='text' />
       <div className='flex flex-col space-y-3'>
         <label htmlFor="f_name">Phone</label>
         <PhoneInput 
