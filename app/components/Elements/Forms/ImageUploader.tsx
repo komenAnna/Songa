@@ -9,13 +9,14 @@ function ImageUploader({ onImageUpload }: { onImageUpload: (imageData: File) => 
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        const imageData = reader.result;
+        const imageData = reader.result as string; // Cast the result to string
         setSelectedImage(imageData);
-        onImageUpload(imageData);
+        // onImageUpload(imageData);
       };
       reader.readAsDataURL(file);
     }
   };
+  
 
   return (
     <div>
