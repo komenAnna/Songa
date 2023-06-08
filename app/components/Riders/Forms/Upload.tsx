@@ -44,7 +44,7 @@ export default function Upload() {
     <FormWrapper title="Documents Upload">
       <div className=''>
         <h2 className="font-semibold">Identification Card (ID)</h2>
-        <div className="flex h-48 border my-3 rounded-lg items-center justify-center">
+        <div className="flex h-48 border w- my-3 rounded-lg items-center justify-center">
           {idImage ? (
             <Image src={idImageUrl} alt="ID" width={100} />
           ) : (
