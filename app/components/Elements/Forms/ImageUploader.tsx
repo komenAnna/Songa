@@ -19,7 +19,7 @@ function ImageUploader({ onImageUpload }: { onImageUpload: (imageData: File) => 
   
 
   return (
-    <div>
+    <div className='w-full'>
       <input type="file" accept="image/*" onChange={handleImageUpload} />
       {selectedImage && (
         <div>
