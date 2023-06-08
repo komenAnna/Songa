@@ -1,62 +1,98 @@
 import React, { useState } from 'react';
 import FormWrapper from '../../Elements/Forms/FormWrapper';
 import 'react-phone-number-input/style.css';
-import PhoneInput from 'react-phone-number-input';
-import { parsePhoneNumberFromString } from 'libphonenumber-js';
-import Input from "react-phone-number-input/input"
 import FormInput from '../../Elements/Forms/FormInput';
+import OTPInput from '../../Elements/Forms/OTP/OTPInput';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css'
+import {parsePhoneNumberFromString} from 'libphonenumber-js'
+
+interface OTPInputProps {
+  index: number;
+}
 
 export default function RiderDetails() {
   const [phone, setPhone] = useState('');
   const [isInputEnabled, setIsInputEnabled] = useState(false);
+  const [showOTP, setShowOTP] = useState(false);
+  const [otpCode, setOtpCode] = useState<string>("");
+  const [isPinReady, setIsPinReady] = useState(false)
+  const maximumCodeLength = 4;
 
-  const handleInputChange = (value: string) => {
-    const phoneNumber = parsePhoneNumberFromString(value);
-    if (phoneNumber && phoneNumber.isValid()) {
-      setPhone(phoneNumber.formatInternational());
-      setIsInputEnabled(true); // Enable the input field for valid phone numbers
+  const handleVerifyClick = () => {
+    setShowOTP(true);
+  };
+
+  const handlePhoneChange = (value: string) => {
+    const numericValue = value.replace(/\D/g, ''); // Remove non-numeric characters
+    let formattedValue = '';
+    if (numericValue.startsWith('0757')) {
+      formattedValue = `+254 ${numericValue.slice(1, 4)} ${numericValue.slice(4)}`;
     } else {
-      setPhone(value);
-      setIsInputEnabled(false); // Disable the input field for invalid phone numbers
+      formattedValue = `+${numericValue}`;
     }
+    const phoneNumber = parsePhoneNumberFromString(formattedValue);
+    if (phoneNumber) {
+      setPhone(phoneNumber.formatInternational());
+    } else {
+      setPhone('');
+    }
+    console.log(phone); // Log the phone number to the console
   };
 
-  const CustomInput = (props: any, ref: any) => {
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setPhone(event.target.value);
-    };
-
-    return (
-      <input
-        {...props}
-        type="tel"
-        // ref={ref}
-        onChange={handleInputChange}
-        value={phone || ''}
-        className="bg-transparent border-0 focus:outline-none h-12 w-full rounded-lg px-3"
-        style={{ color: 'red', fontWeight: 'bold' }} // Example inline styles
-      />
-    );
-  };
 
   return (
     <FormWrapper title="Rider Details">
-      <FormInput label='First Name' type='text' name='f_name' />
-      <FormInput label='Last Name' name='l_name' type='text' />
-      <div className='flex flex-col space-y-3'>
-        <label htmlFor="f_name">Phone</label>
-        <PhoneInput 
-          defaultCountry='KE'
-          placeholder="Enter phone number"
+      <FormInput label="First Name" type="text" name="f_name" />
+      <FormInput label="Last Name" name="l_name" type="text" />
+      <FormInput label="Password" name="l_name" type="text" />
+      <FormInput label="Confirm Password" name="l_name" type="text" />
+      
+      <div className="flex flex-col space-y-3">
+        {/* <label htmlFor="phone">Phone</label> */}
+        <PhoneInput
+          country={'ke'}
           value={phone}
-          onChange={handleInputChange}
-          inputComponent={CustomInput}
-          // numberInputProps={{
-          //   readOnly: !isInputEnabled,
-          //   disabled: !isInputEnabled
-          // }}
-          className='bg-transparent border h-12 rounded-lg px-3'
+          onChange={handlePhoneChange}
+          inputClass='h-12'
+          inputStyle={{
+            width: '100%',
+            borderWidth: 0,
+            backgroundColor: '#222222',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+          containerStyle={{
+            backgroundColor: '#222222',
+          }}
+          dropdownStyle={{
+            backgroundColor: '#222222',
+          }}          
+          containerClass='border-2 bg-primary w-full h-12 rounded-lg'
         />
+
+        <div className='flex justify-between items-center'>
+          {showOTP && (
+            <>
+              <OTPInput
+                code={otpCode}
+                setCode={setOtpCode}
+                maximumLength={maximumCodeLength}
+                setIsPinReady={setIsPinReady}
+              />
+            </>
+          )}
+          <div>
+            <button
+              type="button"
+              className="rounded-lg border-[#FB4552] w-28 h-12 border-2 flex items-center justify-center space-x-3 hover:bg-[#FB4552]"
+              onClick={handleVerifyClick}
+            >
+              Verify
+            </button>
+          </div>
+        </div>
       </div>
     </FormWrapper>
   );

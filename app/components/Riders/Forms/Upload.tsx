@@ -7,19 +7,19 @@ export default function Upload() {
   const [idImage, setIdImage] = useState<File | null>(null);
   const [licenseImage, setLicenseImage] = useState<File | null>(null);
 
-  const [idImageUrl, setIdImageUrl] = useState<string | null>(null);
-  const [licenseImageUrl, setLicenseImageUrl] = useState<string | null>(null);
+  const [idImageUrl, setIdImageUrl] = useState<string>('');
+  const [licenseImageUrl, setLicenseImageUrl] = useState<string>('');
 
 
 
-  const handleIdImageUpload = (imageData: string) => {
-    setIdImage(imageData?.base64);
+  const handleIdImageUpload = (imageData: File) => {
+    setIdImage(imageData);
     // console.log(imageData)
 
   };
 
-  const handleLicenseImageUpload = (imageData: string) => {
-    setLicenseImage(imageData?.base64);
+  const handleLicenseImageUpload = (imageData: File) => {
+    setLicenseImage(imageData);
   };
 
   useEffect(() => {
@@ -42,9 +42,9 @@ export default function Upload() {
 
   return (
     <FormWrapper title="Documents Upload">
-      <div>
+      <div className=''>
         <h2 className="font-semibold">Identification Card (ID)</h2>
-        <div className="h-48 border my-3 rounded-lg items-center">
+        <div className="flex h-48 border my-3 rounded-lg items-center justify-center">
           {idImage ? (
             <Image src={idImageUrl} alt="ID" width={100} />
           ) : (
@@ -54,7 +54,7 @@ export default function Upload() {
       </div>
       <div>
         <h2 className="font-semibold">Driving License</h2>
-        <div className="h-48 border my-3">
+        <div className="flex h-48 border my-3 rounded-lg items-center justify-center">
           {licenseImage ? (
             <Image src={licenseImageUrl} alt="License" width={100} />
           ) : (

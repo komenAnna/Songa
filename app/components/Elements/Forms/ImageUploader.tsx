@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from 'react';
 import Image from 'next/image';
 
-function ImageUploader({ onImageUpload }: { onImageUpload: (imageData: string) => void }) {
+function ImageUploader({ onImageUpload }: { onImageUpload: (imageData: File) => void }) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
@@ -9,7 +9,7 @@ function ImageUploader({ onImageUpload }: { onImageUpload: (imageData: string) =
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        const imageData = reader.result as string;
+        const imageData = reader.result;
         setSelectedImage(imageData);
         onImageUpload(imageData);
       };

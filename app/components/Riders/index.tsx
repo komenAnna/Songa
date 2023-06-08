@@ -22,7 +22,7 @@ export default function RegistrationForm() {
   }
 
   return (
-    <div className='relative h-auto text-white py-5 border md:mx-20 md:my-10 rounded-lg shadow-md'>
+    <div className='relative h-[70v] text-white py-5 border md:mx-20 md:my-10 rounded-lg shadow-md'>
       <form onSubmit={onSubmitHandler} className='p-5'>
         <div className="flex my-4 justify-center h-full">
           <div className="flex flex-col items-end">
