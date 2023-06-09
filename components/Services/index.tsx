@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 function Services() {
   return (
-    <div className='mx-auto w-full bg-white h-[80vh] mt-20 relative'>
+    <div className='mx-auto w-full bg-white h-[100vh] mt-20 relative'>
         {/* dESKTOP */}
         <div className=' flex flex-col mx-auto absolute -top-[10%] w-full z-0'>
             <h1 className='md:text-3xl uppercase mx-auto text-white font-bold'>how it works</h1>
