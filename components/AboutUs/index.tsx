@@ -5,27 +5,27 @@ import React from 'react';
 const AboutUs: React.FC = () => {
   return (
     // component container 
-    <div className="min-w-full h-[80vh] relative my-20 "> 
-        <div className='absolute inset-0 bg-[#181818]'>
+    <div className="h-[120vh] relative my-20 md:min-w-full"> 
+        <div className='absolute inset-0 bg-[#181818] h-[150vh] lg:h-[100vh]'>
           <img src="/assets/images/roads.png" 
                 alt="roads"      
-                className='hidden md:block w-full md:w-4/5 absolute z-0 -top-[10%] left-0 h-[100%]'
+                className='hidden lg:block w-full md:w-4/5 h-[100vh] absolute z-0 -top-[10%] left-0 '
           />
 
-          <div className='absolute z-10 flex flex-col justify-center flex-wrap md:flex-row md:gap-x-16 lg:gap-x-15'>
-            <div className="bg-[#222222] rounded-lg  my-4 mx-4  p-4 border border-red-500 text-white -mt-6 w-auto h-auto  md:w-[400px] lg:ml-[24px] lg:mt-6 lg:w-[615px]">
+          <div className='absolute  flex flex-col justify-center lg:flex-row '>
+            <div className="bg-[#222222] rounded-lg  my-4 mx-12 p-4 border border-red-500 text-white -mt-6 w-3/4 h-auto  md:w-auto lg:ml-[24px] lg:mt-6 lg:w-[615px]">
             <Image className='my-2 mx-auto p-1 md:my-4 md:p-3'
                             src='/assets/images/line.png'
                             alt = 'hr'
                             width={335}
                             height={0}
                         />
-              <h1 className="text-3xl font-bold mb-4 text-center  md:text-start">About Us</h1>
-              <p>
+              <h1 className="text-xl font-bold mb-4 text-center md:text-start md:text-2xl lg:text-3xl">About Us</h1>
+              <p className='text-[14px] md:text-[16px]'>
                 The BODABODA sector is one of the most important contributions to the Kenyan economy. On average, 8 Kenyans rely on one ride for their daily activities, totaling 22 million daily rides in Kenya.
                 With 2 million registered boda riders in Kenya, this business produces Ksh. 370 million each day.
               </p>
-              <p className="mt-4">
+              <p className="mt-4 text-[14px] md:text-[16px]">
                 Despite these strong figures, this business is less controlled by the government, making it a renegade industry.
                 At SONGA, we are attempting to dispel this misconception by providing secure, convenient, and economical trips that leave the consumer with the impression that THIS IS MADE FOR ME.
               </p>
@@ -48,13 +48,21 @@ const AboutUs: React.FC = () => {
               height={0}
           />
           </div>
-          <div className='lg:flex justify-center items-center gap-12'>
+          <div className='relative lg:flex flex-row justify-end items-center gap-48'>
+            {/* <Image className='md:hidden absolute z-0'
+              src='/assets/images/road-bg.png'
+              alt='roads'
+              width={375}
+              height={0}
+
+            /> */}
             <div>
-            <Image className='mx-auto'
+            <Image className='mx-auto '
               src="/assets/icons/pngwing.png"
               alt="About Us Image"
-              width={658}
+              width={640}
               height={0}
+              
             />
             </div>
             <div>
