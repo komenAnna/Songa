@@ -1,8 +1,9 @@
-import AboutUs from '@/components/AboutUs'
+import AboutUs from '@/components/Landing/AboutUs'
 import { Hero } from '@/components'
 import Services from '@/components/Services'
 import Cards from '@/components/Cards'
 import Image from 'next/image'
+import RiderRegistration from '@/components/Landing/RiderRegistration'
 
 export default function Home() {
   return (
@@ -11,6 +12,8 @@ export default function Home() {
       <AboutUs />
       <Services />
       <Cards />
+      {/* <AboutUs /> */}
+      <RiderRegistration />
     </div>
   )
 }
