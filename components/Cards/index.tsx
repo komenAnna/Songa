@@ -39,7 +39,7 @@ function Cards() {
                 src='/assets/icons/card3-icon.png' alt='card-1 icon' width={84} height={84}
             />
             <h2 className='text-2xl text-white font-bold text-center py-4 uppercase'>CUSTOMER FOCUS</h2>
-            <p className='text-center text-white p-2'>We have services fit for the Kenyan economy and promos fit to  client's travel hours. Our technology is up to date and so are our services.</p>
+            <p className='text-center text-white p-2'>We have services fit for the Kenyan economy and promos fit to  client&apos;s travel hours. Our technology is up to date and so are our services.</p>
             <Link href='/' className='text-red-500 text-center py-4 flex flex-row justify-center items-center gap-[0.5rem]'>
                 Learn More
                 <ArrowSmallRightIcon className='h-5 w-5 text-[#FB4552] ' /> 
