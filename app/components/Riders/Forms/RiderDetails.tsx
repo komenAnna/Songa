@@ -45,8 +45,8 @@ export default function RiderDetails() {
     <FormWrapper title="Rider Details">
       <FormInput label="First Name" type="text" name="f_name" required />
       <FormInput label="Last Name" name="l_name" type="text" required />
-      <FormInput label="Password" name="l_name" type="text" required />
-      <FormInput label="Confirm Password" name="l_name" type="text" required />
+      <FormInput label="Password" name="l_name" type="password" required />
+      <FormInput label="Confirm Password" name="l_name" type="password" required />
       
       <div className="flex flex-col space-y-3">
         {/* <label htmlFor="phone">Phone</label> */}
