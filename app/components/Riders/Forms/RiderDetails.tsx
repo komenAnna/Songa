@@ -72,7 +72,7 @@ export default function RiderDetails() {
           containerClass='border-2 bg-primary w-full h-12 rounded-lg'
         />
 
-        <div className='flex justify-between items-center'>
+        {/* <div className='flex justify-between items-center'>
           {showOTP && (
             <>
               <OTPInput
@@ -92,7 +92,7 @@ export default function RiderDetails() {
               Verify
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </FormWrapper>
   );
