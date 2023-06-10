@@ -8,5 +8,8 @@
 body {
     background: #222222;
   }
+.roads {
+  display: none;
+}
   
   
