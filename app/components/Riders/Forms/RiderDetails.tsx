@@ -43,10 +43,10 @@ export default function RiderDetails() {
 
   return (
     <FormWrapper title="Rider Details">
-      <FormInput label="First Name" type="text" name="f_name" />
-      <FormInput label="Last Name" name="l_name" type="text" />
-      <FormInput label="Password" name="l_name" type="text" />
-      <FormInput label="Confirm Password" name="l_name" type="text" />
+      <FormInput label="First Name" type="text" name="f_name" required />
+      <FormInput label="Last Name" name="l_name" type="text" required />
+      <FormInput label="Password" name="l_name" type="password" required />
+      <FormInput label="Confirm Password" name="l_name" type="password" required />
       
       <div className="flex flex-col space-y-3">
         {/* <label htmlFor="phone">Phone</label> */}
@@ -72,7 +72,7 @@ export default function RiderDetails() {
           containerClass='border-2 bg-primary w-full h-12 rounded-lg'
         />
 
-        <div className='flex justify-between items-center'>
+        {/* <div className='flex justify-between items-center'>
           {showOTP && (
             <>
               <OTPInput
@@ -92,7 +92,7 @@ export default function RiderDetails() {
               Verify
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </FormWrapper>
   );
