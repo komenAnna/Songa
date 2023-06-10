@@ -11,8 +11,8 @@ type RiderDetails = {
   dl_photo: string;
   bike_type: string;
   plate_no: string;
-  insuarance_provider: string;
-  insuarance_policy_no: string;
+  insurance_provider: string;
+  insurance_policy_no: string;
 };
 
 type RiderDetailsProps = RiderDetails & {
@@ -21,7 +21,7 @@ type RiderDetailsProps = RiderDetails & {
 
 export default function Preview({ ...riderDetails }: RiderDetailsProps) {
   return (
-    <FormWrapper title="Preview">
+    <FormWrapper title="">
       <div className="h-96 bg-[#222222] text-white p-6">
         <div className="mb-8">
           <h1 className="mb-2 text-lg font-semibold">Personal Information</h1>
@@ -43,8 +43,8 @@ export default function Preview({ ...riderDetails }: RiderDetailsProps) {
         <div>
           <h1 className="mb-2 text-lg font-semibold">Insurance Information</h1>
           <div>
-            <p className="mb-2">Insurance Provider: {riderDetails.insuarance_provider}</p>
-            <p className="mb-2">Insurance Policy Number: {riderDetails.insuarance_policy_no}</p>
+            <p className="mb-2">Insurance Provider: {riderDetails.insurance_provider}</p>
+            <p className="mb-2">Insurance Policy Number: {riderDetails.insurance_policy_no}</p>
           </div>
         </div>
       </div>

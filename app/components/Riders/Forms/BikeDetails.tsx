@@ -5,17 +5,17 @@ import FormWrapper from '../../Elements/Forms/FormWrapper'
 type RiderDetails = {
   bike_type: string;
   plate_no: string;
-  insuarance_provider: string;
-  insuarance_policy_no: string;
+  insurance_provider: string;
+  insurance_policy_no: string;
 }
 
 type RiderDetailsProps = RiderDetails & {
   updateFields: (fields: Partial<RiderDetails>) => void;
 }
 
-export default function BikeDetails({ bike_type, plate_no, insuarance_policy_no, insuarance_provider, updateFields }: RiderDetailsProps) {
+export default function BikeDetails({ bike_type, plate_no, insurance_policy_no, insurance_provider, updateFields }: RiderDetailsProps) {
   return (
-    <FormWrapper title='Bike Details'>
+    <FormWrapper title=''>
       <FormInput
         label='Type of Bike'
         value={bike_type}
@@ -34,16 +34,16 @@ export default function BikeDetails({ bike_type, plate_no, insuarance_policy_no,
       />
       <FormInput
         label='Insuarance Provider'
-        value={insuarance_provider}
-        onChange={e => updateFields({ insuarance_provider: e.target.value })}
+        value={insurance_provider}
+        onChange={e => updateFields({ insurance_provider: e.target.value })}
         name='insuarance_provider'
         type='text'
         required={false}
       />
       <FormInput
         label='Insuarance Policy Number'
-        value={insuarance_policy_no}
-        onChange={e => updateFields({ insuarance_policy_no: e.target.value })}
+        value={insurance_policy_no}
+        onChange={e => updateFields({ insurance_policy_no: e.target.value })}
         name='insuarance_policy_no'
         type='text'
         required={false}

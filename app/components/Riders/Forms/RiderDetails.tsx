@@ -13,6 +13,7 @@ type RiderDetails = {
   password: string;
   phone_no: string;
   confirmPassword: string;
+  
   // onPhoneChange: (phone: string) => void;
 }
 
@@ -55,7 +56,7 @@ export default function RiderDetails({ first_name, last_name, password, phone_no
 
 
   return (
-    <FormWrapper title="Rider Details">
+    <FormWrapper title="">
       <FormInput value={first_name} onChange={(e) => updateFields({ first_name: e.target.value })} label="First Name" type="text" name="f_name" required />
       <FormInput value={last_name} onChange={(e) => updateFields({ last_name: e.target.value })} label="Last Name" name="l_name" type="text" required />
       <FormInput value={password} onChange={(e) => updateFields({ password: e.target.value })} label="Password" name="l_name" type="password" required />

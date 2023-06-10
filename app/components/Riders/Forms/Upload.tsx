@@ -50,7 +50,7 @@ export default function Upload({ updateFields }: RiderDetailsProps) {
   }, [idImage, licenseImage])
 
   return (
-    <FormWrapper title="Documents Upload">
+    <FormWrapper title="">
       <div className=''>
         <h2 className="font-semibold">Identification Card (ID)</h2>
         <div className="flex h-48 border w-[17rem] my-3 rounded-lg items-center justify-center">
