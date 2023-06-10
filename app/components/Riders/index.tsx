@@ -1,18 +1,54 @@
 /* eslint-disable react/jsx-key */
 "use client"
 import { useMultistepForm } from '@/app/hooks/useMultistepForm'
-import React, { FormEvent } from 'react'
+import React, { FormEvent, useState } from 'react'
 import RiderDetails from './Forms/RiderDetails'
 import Upload from './Forms/Upload'
 import Preview from './Preview'
 import BikeDetails from './Forms/BikeDetails'
 
+type FormData = {
+  first_name: string,
+  last_name: string,
+  password: string,
+  confirmPassword: string,
+  phone_no: string,
+  id_photo: string,
+  dl_photo: string,
+  bike_type: string,
+  plate_no: string,
+  insuarance_provider: string,
+  insuarance_policy_no: string,
+}
+
+const INITAL_DATA: FormData = {
+  first_name: "",
+  last_name: "",
+  password: "",
+  confirmPassword: "",
+  phone_no: "",
+  id_photo: "",
+  dl_photo: "",
+  bike_type: "",
+  plate_no: "",
+  insuarance_provider: "",
+  insuarance_policy_no: "",
+}
+
 export default function RegistrationForm() {
+  const [data, setData] = useState(INITAL_DATA)
+
+  function updateFields(fields: Partial<FormData>) {
+    setData(prev => {
+      return { ...prev, ...fields }
+    })
+  }
+
   const { steps, currentStepIndex, step, isFirstStep, back, next, isLastStep } = useMultistepForm([
-    <RiderDetails />,
-    <Upload />,
-    <BikeDetails />,
-    <Preview />
+    <RiderDetails {...data} updateFields={updateFields} />,
+    <Upload {...data} updateFields={updateFields} />,
+    <BikeDetails {...data} updateFields={updateFields} />,
+    <Preview {...data} updateFields={updateFields} />
   ])
 
   function onSubmitHandler(e: FormEvent) {
