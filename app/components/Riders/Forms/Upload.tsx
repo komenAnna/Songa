@@ -3,7 +3,16 @@ import FormWrapper from '../../Elements/Forms/FormWrapper';
 import ImageUploader from '../../Elements/Forms/ImageUploader';
 import Image from 'next/image';
 
-export default function Upload() {
+type RiderDetails = {
+  id_photo: string;
+  dl_photo: string;
+}
+
+type RiderDetailsProps = RiderDetails & {
+  updateFields: (fields: Partial<RiderDetails>) => void;
+}
+
+export default function Upload({ updateFields }: RiderDetailsProps) {
   const [idImage, setIdImage] = useState<File | null>(null);
   const [licenseImage, setLicenseImage] = useState<File | null>(null);
 
@@ -14,12 +23,12 @@ export default function Upload() {
 
   const handleIdImageUpload = (imageData: File) => {
     setIdImage(imageData);
-    // console.log(imageData)
-
+    updateFields({ id_photo: imageData.name });
   };
 
   const handleLicenseImageUpload = (imageData: File) => {
     setLicenseImage(imageData);
+    updateFields({ dl_photo: imageData.name });
   };
 
   useEffect(() => {
@@ -41,7 +50,7 @@ export default function Upload() {
   }, [idImage, licenseImage])
 
   return (
-    <FormWrapper title="Documents Upload">
+    <FormWrapper title="">
       <div className=''>
         <h2 className="font-semibold">Identification Card (ID)</h2>
         <div className="flex h-48 border w-[17rem] my-3 rounded-lg items-center justify-center">

@@ -2,14 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* styles/globals.css */
 
 body {
-    background: #222222;
-  }
+  background: #222222;
+}
+
+.step-container::before {
+  content: "";
+  position: absolute;
+  background: #f3e7f3;
+  height: 4px;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+}
+
 .roads {
   display: none;
 }
-  
-  

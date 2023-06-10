@@ -1,18 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FormWrapper from '../../Elements/Forms/FormWrapper';
 import 'react-phone-number-input/style.css';
 import FormInput from '../../Elements/Forms/FormInput';
 import OTPInput from '../../Elements/Forms/OTP/OTPInput';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css'
-import {parsePhoneNumberFromString} from 'libphonenumber-js'
+import { parsePhoneNumberFromString } from 'libphonenumber-js'
 
-interface OTPInputProps {
-  index: number;
+type RiderDetails = {
+  first_name: string;
+  last_name: string;
+  password: string;
+  phone_no: string;
+  confirmPassword: string;
+  
+  // onPhoneChange: (phone: string) => void;
 }
 
-export default function RiderDetails() {
-  const [phone, setPhone] = useState('');
+type RiderDetailsProps = RiderDetails & {
+  updateFields: (fields: Partial<RiderDetails>) => void;
+}
+
+export default function RiderDetails({ first_name, last_name, password, phone_no, confirmPassword, updateFields }: RiderDetailsProps) {
+  const [phone, setPhone] = useState(phone_no);
   const [isInputEnabled, setIsInputEnabled] = useState(false);
   const [showOTP, setShowOTP] = useState(false);
   const [otpCode, setOtpCode] = useState<string>("");
@@ -22,6 +32,8 @@ export default function RiderDetails() {
   const handleVerifyClick = () => {
     setShowOTP(true);
   };
+
+  
 
   const handlePhoneChange = (value: string) => {
     const numericValue = value.replace(/\D/g, ''); // Remove non-numeric characters
@@ -34,20 +46,22 @@ export default function RiderDetails() {
     const phoneNumber = parsePhoneNumberFromString(formattedValue);
     if (phoneNumber) {
       setPhone(phoneNumber.formatInternational());
+      updateFields({ phone_no: phoneNumber.formatInternational() })
     } else {
       setPhone('');
+      updateFields({ phone_no: '' })
     }
     console.log(phone); // Log the phone number to the console
   };
 
 
   return (
-    <FormWrapper title="Rider Details">
-      <FormInput label="First Name" type="text" name="f_name" required />
-      <FormInput label="Last Name" name="l_name" type="text" required />
-      <FormInput label="Password" name="l_name" type="password" required />
-      <FormInput label="Confirm Password" name="l_name" type="password" required />
-      
+    <FormWrapper title="">
+      <FormInput value={first_name} onChange={(e) => updateFields({ first_name: e.target.value })} label="First Name" type="text" name="f_name" required />
+      <FormInput value={last_name} onChange={(e) => updateFields({ last_name: e.target.value })} label="Last Name" name="l_name" type="text" required />
+      <FormInput value={password} onChange={(e) => updateFields({ password: e.target.value })} label="Password" name="l_name" type="password" required />
+      <FormInput value={confirmPassword} onChange={(e) => updateFields({ confirmPassword: e.target.value })} label="Confirm Password" name="l_name" type="password" required />
+
       <div className="flex flex-col space-y-3">
         {/* <label htmlFor="phone">Phone</label> */}
         <PhoneInput
@@ -68,7 +82,7 @@ export default function RiderDetails() {
           }}
           dropdownStyle={{
             backgroundColor: '#222222',
-          }}          
+          }}
           containerClass='border-2 bg-primary w-full h-12 rounded-lg'
         />
 
