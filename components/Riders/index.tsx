@@ -1,5 +1,5 @@
 "use client"
-import { useMultistepForm } from '@/app/hooks/useMultistepForm';
+import { useMultistepForm } from '@/hooks/useMultistepForm';
 /* eslint-disable react/jsx-key */
 import React, { FormEvent, useState } from 'react';
 import ProgressSteps from '../Elements/Loaders/ProgressSteps';
