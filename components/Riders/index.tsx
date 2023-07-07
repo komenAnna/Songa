@@ -63,7 +63,7 @@ export default function RegistrationForm() {
   const progressPercentage = ((currentStepIndex + 1) / steps.length) * 100;
 
   return (
-    <div className="relative text-white py-5 px-3 border md:mx-20 w-[86vw] md:w-auto md:my-10 rounded-lg shadow-md">
+    <div className="relative text-white py-5 px-3 border md:mx-20 w-[86vw] bg-primary md:w-auto md:my-10 rounded-lg shadow-md">
       <form onSubmit={onSubmitHandler} className="p-5">
         {/* Custom Progress Bar */}
         <ProgressSteps steps={steps} currentStepIndex={currentStepIndex} />

@@ -4,79 +4,49 @@ import React from 'react';
 
 const AboutUs: React.FC = () => {
   return (
-    <div className="min-w-full h-[80vh] relative my-20">
-      <div className="absolute inset-0 bg-[#181818] w-full">
-        <img
-          src="/assets/images/roads.png"
-          alt="roads"
-          className="hidden md:block w-[100%] md:w-4/5 absolute z-0 -top-[10%] left-0 h-[100%]"
-        />
+    <div className='w-auto h-auto bg-white md:flex'>
+      <div className='mt-20 flex flex-col items-center  md:w-1/2 md:items-start md:px-12'>
+        <div className="lg:w-[362px] h-[89px] text-black text-[70px] font-bold leading-10">
+          About Us
+        </div>
+        <div className="w-[165px] h-[18px] mb-4 mt-2 relative">
+          <Image
+            src='/assets/images/miniflag.png'
+            alt='Kenyan miniflag'
+            fill={true}
+          />
+        </div>
+        <div className="text-center mt-4 px-8 md:px-0 text-lg md:text-justify text-black text-[14px] font-semibold leading-normal">SONGA is the technology of a digital bodaboda ecosystem shared between riders and passengers through an app.</div>
 
-        <div className="absolute z-10 flex flex-col justify-center flex-wrap md:flex-row md:gap-x-16 lg:gap-x-15">
-          <div className="bg-[#222222] rounded-lg my-4 mx-4 p-4 border border-red-500 text-white -mt-6 w-auto h-auto md:w-[400px] lg:ml-[24px] lg:mt-6 lg:w-[615px]">
-            <Image
-              className="my-2 mx-auto p-1 md:my-4 md:p-3"
-              src="/assets/images/line.png"
-              alt="hr"
-              width={335}
-              height={0}
-            />
-            <h1 className="text-3xl font-bold mb-4 text-center md:text-start">About Us</h1>
-            <p className="text-sm md:text-base">
-              The BODABODA sector is one of the most important contributions to the Kenyan economy. On average, 8 Kenyans
-              rely on one ride for their daily activities, totaling 22 million daily rides in Kenya. With 2 million
-              registered boda riders in Kenya, this business produces Ksh. 370 million each day.
-            </p>
-            <p className="mt-4 text-sm md:text-base">
-              Despite these strong figures, this business is less controlled by the government, making it a renegade
-              industry. At SONGA, we are attempting to dispel this misconception by providing secure, convenient, and
-              economical trips that leave the consumer with the impression that THIS IS MADE FOR ME.
-            </p>
-            <button className="hidden sm:flex mt-4 bg-transparent border border-white rounded-full px-4 py-2 items-center justify-center text-white hover:bg-white hover:text-black transition duration-300">
-              Learn more
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                className="w-4 h-4 ml-1"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-            <Image
-              className="my-2 mx-auto p-3 md:my-3 md:p-3"
-              src="/assets/images/line.png"
-              alt="hr"
-              width={335}
-              height={0}
-            />
+        <div className='flex flex-col gap-y-4 md:w-full md:flex-row md:justify-between md:items-center mt-8'>
+            <div className="w-[117px] h-[125.93px] relative">
+              <div className="w-[117px] h-[69px] left-0 top-0 absolute"><span className="text-green-600 text-[40px] font-extrabold leading-10">+</span><span className="text-green-600 text-[70px] font-extrabold leading-10">1</span><span className="text-green-600 text-[32px] font-normal leading-5">K</span></div>
+              <div className="w-[110.04px] h-[17.93px] left-[38px] top-[78px] md:top-[108px] absolute text-green-600 text-[20px] font-semibold leading-relaxed">RIDERS</div>
+            </div>
+
+          <div className="w-[142px] h-[125.93px] relative">
+            <div className="w-[142px] h-[69px] left-0 top-0 absolute"><span className="text-green-600 text-[40px] font-extrabold leading-10">+</span><span className="text-green-600 text-[70px] font-extrabold leading-10">10</span><span className="text-green-600 text-[32px] font-normal leading-5">K</span></div>
+            <div className="w-[66.44px] h-[17.93px] left-[38px] top-[78px] md:top-[108px] absolute text-green-600 text-[20px] font-semibold leading-relaxed">TRIPS</div>
           </div>
 
-        </div>
-        <div className="lg:flex justify-center items-center gap-12">
-          <div className="flex justify-center items-center md:flex-row flex-col">
-            <Image
-              className="mx-auto"
-              src="/assets/icons/pngwing.png"
-              alt="About Us Image"
-              width={658}
-              height={0}
-            />
-          </div>
-          <div className="flex justify-center items-center md:flex-row flex-col">
-            <Image
-              className="hidden md:hidden lg:block"
-              src="/assets/images/miniflag.png"
-              alt="kenyan flag"
-              width={72}
-              height={0}
-            />
+          <div className="w-[147px] h-[125.93px] relative">
+            <div className="w-[147px] h-[69px] left-0 top-0 absolute"><span className="text-green-600 text-[70px] font-extrabold leading-10">24</span><span className="text-green-600 text-[32px] font-normal leading-10">Hrs</span></div>
+            <div className="w-[96.88px] h-[17.93px] left-[25px] top-[78px] md:top-[108px] absolute text-green-600 text-[20px] font-semibold leading-relaxed">SERVICE</div>
           </div>
         </div>
-      </div>
     </div>
-  );
+    <div className='mt-20 flex items-center justify-center'>
+      <Image
+        src='/assets/images/bike.png'
+        alt='bike image'
+        width={420}
+        height={540}
+        className='md:pl-20'
+      />
+    </div>
+
+</div>
+);
 };
 
 export default AboutUs;
