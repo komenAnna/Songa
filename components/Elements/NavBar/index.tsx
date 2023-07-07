@@ -65,7 +65,7 @@ export const NavBar = () => {
           {/* map through the array to display each link */}
           <div className='md:px-2 md:text-sm lg:px-4 lg:text-lg'>
             {navLinks.map(navLink=>(
-              <Link key={navLink.id} href={navLink.url} className="mx-2 lg:mx-4">{navLink.title}</Link>
+              <Link key={navLink.id} href={navLink.url} className="mx-2 lg:mx-4 text-[14px]">{navLink.title}</Link>
             ))}
           </div>
         </div>
@@ -77,10 +77,10 @@ export const NavBar = () => {
           </Link>
           </div> */}
           <div className=''>
-            <button>
-            <Link href='/' className='border border-[#FB4552] rounded-full flex items-center justify-center px-2 py-2 hover:bg-black'>
+            <button className=''>
+            <Link href='/' className='border border-[#FB4552] rounded-full flex items-center justify-center px-4  py-1  hover:bg-black text-[14px]'>
               Sign Up
-              <AiOutlineArrowRight className='w-5 h-5 text-[#FB4552] '/>
+              <AiOutlineArrowRight className='w-5 h-5 text-[#FB4552] ml-2'/>
           </Link>
             </button>
           </div>
@@ -94,7 +94,7 @@ export const NavBar = () => {
       
       <div className={!nav ? 'hidden' : 'flex flex-col items-center justify-center bg-black text-lg border-b-2 border-green-100'}>
             {navLinks.map(link=>(
-                <Link key={link.id} href={link.url} className='py-4 xl:hidden'>{link.title}
+                <Link key={link.id} href={link.url} className='py-4 xl:hidden '>{link.title}
                 </Link>
             ))}
             <div className='flex flex-col mb-4 md:hidden'>

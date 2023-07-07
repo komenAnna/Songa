@@ -17,7 +17,7 @@ export const Hero = () => {
             <div className="w-full h-full flex flex-col justify-center items-center backdrop-brightness-50 absolute z-2">
                 <span className="text-white w-full mx-12 px-12 md:pl-20">
                    <h1 className='text-2xl md:text-5xl font-bold'>DIGITIZING THE BODA BODA INDUSTRY.</h1>
-                   <p className="text-[#ffffff] font-bold text-lg my-8 md:w-[611px]">
+                   <p className="text-[#ffffff] font-light text-lg my-8 md:w-[611px]">
                    Ride on us and experience the technology our rides have to offer.
                     </p>
                     <div className='flex flex-col gap-y-8  pt-4 md:space-x-12 md:flex-row md:w-full'>
