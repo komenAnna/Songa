@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from 'next/image';
 import React from 'react';
+import Link from 'next/link';
 
 const AboutUs: React.FC = () => {
   return (
@@ -17,7 +18,11 @@ const AboutUs: React.FC = () => {
           />
         </div>
         <div className="text-center mt-4 px-8 md:px-0 text-lg md:text-justify text-black text-[14px] font-semibold leading-normal">SONGA is the technology of a digital bodaboda ecosystem shared between riders and passengers through an app.</div>
-
+        <div className='my-4'>
+          <button className='rounded-md border border-[#FB4552]'>
+            <Link href='/' className='p-8 text-lg text-black font-bold'>Learn more</Link>
+          </button>
+        </div>
         <div className='flex flex-col gap-y-4 md:w-full md:flex-row md:justify-between md:items-center mt-8'>
             <div className="w-[117px] h-[125.93px] relative">
               <div className="w-[117px] h-[69px] left-0 top-0 absolute"><span className="text-green-600 text-[40px] font-extrabold leading-10">+</span><span className="text-green-600 text-[70px] font-extrabold leading-10">1</span><span className="text-green-600 text-[32px] font-normal leading-5">K</span></div>
