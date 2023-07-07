@@ -5,7 +5,8 @@
 /* styles/globals.css */
 
 body {
-  background: #222222;
+  /* background: #222222; */
+  overflow-x: hidden;
 }
 
 .step-container::before {
@@ -22,3 +23,4 @@ body {
 .roads {
   display: none;
 }
+
