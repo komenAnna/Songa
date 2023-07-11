@@ -11,7 +11,7 @@ export const Hero = () => {
                 src='/assets/images/bg-image.png'
                 alt='Hero Image'
                 fill={true}
-                className="object-fill h-[80vh] absolute z-0 left-0"
+                className="object-cover md:object-fill h-[80vh] absolute z-0 left-0"
                 />
             </div>
             <div className="w-full h-full flex flex-col justify-center items-center backdrop-brightness-50 absolute z-2">
