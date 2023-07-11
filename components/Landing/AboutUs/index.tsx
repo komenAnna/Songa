@@ -6,7 +6,7 @@ import Link from 'next/link';
 const AboutUs: React.FC = () => {
   return (
     <div className='w-auto h-auto bg-white md:flex'>
-      <div className='mt-20 flex flex-1 flex-col items-center  md:w-1/2 md:items-start md:px-12'>
+      <div className='mt-20 flex flex-col flex-1 items-center mx-12 md:w-1/2 md:items-start md:px-12'>
         <div className="lg:w-[362px] h-[89px] text-black text-6xl font-bold leading-10">
           About Us
         </div>
