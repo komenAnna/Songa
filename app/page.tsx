@@ -3,6 +3,7 @@ import RiderRegistration from '@/components/Landing/RiderRegistration'
 import { Hero } from '../components'
 import AboutUs from '../components/Landing/AboutUs'
 import Partnerships from '@/components/Landing/Partnerships'
+import Careers from '@/components/Landing/Careers'
 
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
       <Hero />
       <AboutUs />
       <Partnerships/>
+      <Careers/>
       {/* <Services />
       <Cards /> */}
       {/* <AboutUs /> */}

@@ -3,10 +3,10 @@ import Image from 'next/image'
 
 const Partnerships = () => {
   return (
-    <div className="w-screen h-auto md:h-[470px] bg-stone-100">
+    <div className="w-full h-auto md:h-[470px] bg-stone-100">
         <div className='flex flex-col md:flex-row items-center justify-center'>
             <div className='mt-20 mx-12 md:px-12'>
-                <div className="text-black text-6xl font-bold leading-[91px]">
+                <div className="text-black text-4xl text-center md:text-start md:text-6xl font-bold leading-[91px]">
                     <h1>Partnerships</h1>
                 </div>
                 <div className="text-justify text-black text-sm font-semibold leading-[18.20px]">SONGA is an ecosystem that works closely with enterprise players in order to ensure that the rides we offer are convenient.<br/><br/>This involves working together to collaboratively empower the rider. To partner with us in this journey , kindly reach us through partnerships@songa.app and we will get in touch in the shortest time possible.<br/></div>
