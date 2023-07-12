@@ -5,7 +5,7 @@ import Link from 'next/link'
 const Careers = () => {
   return (
     <div className="w-full h-auto bg-stone-100">
-        <div className='mt-20 mx-12 md:px-12'>
+        <div className='pt-20 mx-12 md:px-8'>
             <div className="text-center text-4xl md:text-start text-black pt-4 md:text-6xl font-bold leading-[91px]">
                 Careers
             </div>
@@ -14,7 +14,7 @@ const Careers = () => {
             <div className="w-1/2 grid grid-cols-2 gap-x-52">
                 <div className="col-span-1">
                     <div className="relative">
-                        <div className="w-[250.04px] h-[605.26px] left-0 top-0 absolute bg-zinc-300 rounded-[70px]">
+                        <div className="w-[250.04px] h-[605.26px] left-0 top-0 absolute bg-zinc-300 rounded-[70px] border border-1 border-green-600">
                             <Image
                             src='/assets/images/careers-1.png'
                             alt=''
@@ -26,7 +26,7 @@ const Careers = () => {
                 <div className="col-span-1 grid grid-rows-2 gap-4 ">
                 <div className="h-2/5">
                 <div className="w-[204.04px] h-[346.35px] relative">
-                        <div className="w-[204.04px] h-[346.35px] left-0 top-0 absolute bg-zinc-300 rounded-[70px]">
+                        <div className="w-[204.04px] h-[346.35px] left-0 top-0 absolute bg-zinc-300 rounded-[70px] border border-1 border-green-600">
                             <Image
                             src='/assets/images/careers-2.png'
                             alt=''
@@ -39,7 +39,7 @@ const Careers = () => {
                     
                     <div className="h-1/2">
                         <div className="w-[308.63px] h-[230.62px] relative">
-                            <div className="w-[308.63px] h-[230.62px] left-0 top-0 absolute bg-zinc-300 rounded-[70px]">
+                            <div className="w-[308.63px] h-[230.62px] left-0 top-0 absolute bg-zinc-300 rounded-[70px] border border-1 border-green-600">
                                 <Image
                                 src='/assets/images/careers-3.png'
                                 alt=''

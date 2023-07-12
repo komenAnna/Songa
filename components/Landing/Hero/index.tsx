@@ -2,6 +2,8 @@ import Image from 'next/image'
 import React from 'react'
 import Link from 'next/link';
 import { ArrowSmallRightIcon } from '@heroicons/react/24/solid'
+import "react-responsive-carousel/lib/styles/carousel.min.css"
+import { Carousel } from 'react-responsive-carousel';
 
 export const Hero = () => {
     return (
@@ -32,10 +34,8 @@ export const Hero = () => {
                             </Link>
                         </button>
                     </div>
-                </span>
-
-                
-        </div>
+                </span>       
+            </div>
         </div>
     );
 };
