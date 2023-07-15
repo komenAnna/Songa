@@ -12,7 +12,7 @@ const Blog = () => {
                 <div className='col-span-1 shadow-lg'>
                     <Image
                     src='/assets/images/SONGA thumbnails-01.png'
-                    alt=''
+                    alt='blog-1'
                     width={304}
                     height={539}
                     className='absolute'/>
@@ -23,19 +23,19 @@ const Blog = () => {
                             <div className='shadow-lg'>
                                 <Image
                                 src='/assets/images/SONGA thumbnails-05.png'
-                                alt=''
+                                alt='blog-2'
                                 width={303}
                                 height={303}
-                                className=''/>
+                                />
                                 
                             </div>
                             <div className='shadow-lg'>
                                 <Image
                                 src='/assets/images/SONGA thumbnails-03.png'
-                                alt=''
+                                alt='blog-3'
                                 width={303}
                                 height={303}
-                                className=''/>
+                                />
                             </div>
                         </div>
                         
@@ -45,21 +45,20 @@ const Blog = () => {
                             <div className='shadow-lg'>
                                 <Image
                                     src='/assets/images/SONGA thumbnails-04.png'
-                                    alt=''
+                                    alt='blog-4'
                                     width={541}
                                     height={303}
-                                    className=''/>
+                                    />
                             </div>
                             <div className='shadow-lg'>
                                 <Image
                                     src='/assets/images/SONGA thumbnails-02.png'
-                                    alt=''
+                                    alt='blog-5'
                                     width={304}
                                     height={303}
-                                    className=''/>
+                                    />
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>

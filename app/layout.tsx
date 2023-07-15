@@ -1,10 +1,6 @@
 import { NavBar } from '@/components'
 import './globals.css'
-import { useState } from 'react'
-import { Inter } from 'next/font/google'
 import Footer from '@/components/Elements/Footer'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Songa',
@@ -18,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <NavBar />
         {children}
       </body>

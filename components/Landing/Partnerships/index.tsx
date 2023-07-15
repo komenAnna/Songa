@@ -21,7 +21,7 @@ const Partnerships = () => {
                     <div className="w-[107.39px] h-[107.39px] relative ">
                         <Image
                         src='/assets/images/SONGA-small-logo.png'
-                        alt=''
+                        alt='SONGA-partners'
                         fill={true}
                         className=''
                         />
@@ -31,7 +31,7 @@ const Partnerships = () => {
                     <div className="w-[207px] h-[207px] relative">
                     <Image
                         src='/assets/images/SONGA-small-red-logo.png'
-                        alt=''
+                        alt='SONGA-partners'
                         fill={true}
                         className=''
                         />
@@ -45,7 +45,7 @@ const Partnerships = () => {
                     <div className="w-[107.39px] h-[107.39px] relative ">
                         <Image
                         src='/assets/images/SONGA-small-logo.png'
-                        alt=''
+                        alt='SONGA-partners'
                         fill={true}
                         className=''
                         />
@@ -55,7 +55,7 @@ const Partnerships = () => {
                     <div className="w-[107.39px] h-[107.39px] relative ">
                         <Image
                         src='/assets/images/SONGA-small-logo.png'
-                        alt=''
+                        alt='SONGA-partners'
                         fill={true}
                         className=''
                         />
@@ -65,7 +65,7 @@ const Partnerships = () => {
                     <div className="w-[107.39px] h-[107.39px] relative ">
                         <Image
                         src='/assets/images/SONGA-small-logo.png'
-                        alt=''
+                        alt='SONGA-partners'
                         fill={true}
                         className=''
                         />
@@ -79,7 +79,7 @@ const Partnerships = () => {
                     <div className="w-[107.39px] h-[107.39px] relative ">
                         <Image
                         src='/assets/images/SONGA-small-logo.png'
-                        alt=''
+                        alt='SONGA-partners'
                         fill={true}
                         className=''
                         />
@@ -89,7 +89,7 @@ const Partnerships = () => {
                     <div className="w-[107.39px] h-[107.39px] relative ">
                         <Image
                         src='/assets/images/SONGA-small-logo.png'
-                        alt=''
+                        alt='SONGA-partners'
                         fill={true}
                         className=''
                         />

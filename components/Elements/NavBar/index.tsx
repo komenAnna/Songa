@@ -43,7 +43,7 @@ export const NavBar = () => {
   return (
     <div className='text-white text-lg h-auto min-w-full drop-shadow-lg absolute z-10'>
       <div className='flex items-center justify-between '>
-        <div className=''>
+        <div>
          <Image
          src='/assets/images/FLAG.png'
          alt='Kenyan flag'
@@ -52,7 +52,7 @@ export const NavBar = () => {
          />
         </div>
 
-        <div className=''>
+        <div>
          <Image
          src='/assets/icons/SONGA-red-logo.png'
          alt='Songa Logo'
@@ -76,8 +76,8 @@ export const NavBar = () => {
               Log in
           </Link>
           </div> */}
-          <div className=''>
-            <button className=''>
+          <div>
+            <button>
             <Link href='/' className='border border-[#FB4552] rounded-full flex items-center justify-center px-4  py-1  hover:bg-black text-[14px]'>
               Sign Up
               <AiOutlineArrowRight className='w-5 h-5 text-[#FB4552] ml-2'/>
@@ -98,9 +98,6 @@ export const NavBar = () => {
                 </Link>
             ))}
             <div className='flex flex-col mb-4 md:hidden'>
-                    {/* <button className='border-none my-4 xl:px-8 py-[8px] outline-none text-white rounded-md'>
-                        Log in
-                    </button> */}
                     <button className='border border-[#FB4552] rounded-full py-2 px-4 text-white flex items-center justify-center space-x-3'>
                       <Link href='/'>Sign Up</Link>
                       <AiOutlineArrowRight className='w-5 h-5 text-[#FB4552] ml-2'/>

@@ -17,9 +17,6 @@ export default function Home() {
       <Cards />
       <Careers/>
       <Blog />
-      {/* <Services />
-      <Cards /> */}
-      {/* <AboutUs /> */}
       <RiderRegistration />
     </div>
   )

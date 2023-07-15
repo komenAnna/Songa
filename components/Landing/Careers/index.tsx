@@ -17,7 +17,7 @@ const Careers = () => {
                         <div className="w-[250.04px] h-[605.26px] left-0 top-0 absolute bg-zinc-300 rounded-[70px] border border-1 border-green-600">
                             <Image
                             src='/assets/images/careers-1.png'
-                            alt=''
+                            alt='career-img-1'
                             fill={true}
                             className='rounded-[70px] object-cover absolute'/>
                         </div>
@@ -29,7 +29,7 @@ const Careers = () => {
                         <div className="w-[204.04px] h-[346.35px] left-0 top-0 absolute bg-zinc-300 rounded-[70px] border border-1 border-green-600">
                             <Image
                             src='/assets/images/careers-2.png'
-                            alt=''
+                            alt='career-img-2'
                             width={360.07}
                             height={451.11}
                             className="rounded-[70px] absolute" />
@@ -42,7 +42,7 @@ const Careers = () => {
                             <div className="w-[308.63px] h-[230.62px] left-0 top-0 absolute bg-zinc-300 rounded-[70px] border border-1 border-green-600">
                                 <Image
                                 src='/assets/images/careers-3.png'
-                                alt=''
+                                alt='career-img-3'
                                 width={364.36}
                                 height={263.20}
                                 className='rounded-[70px] absolute' />
