@@ -13,7 +13,7 @@ export default function FormInput({ label, type, name, required, value, onChange
     return (
         <div className='flex flex-col space-y-3'>
             <label htmlFor={label}>{label}</label>
-            <input autoComplete='off' value={value} type={type} name={name} required={required} onChange={onChange} className='bg-transparent border h-12 rounded-lg px-4' />
+            <input value={value} type={type} name={name} required={required} onChange={onChange} className='bg-transparent border-[#FB4552] border-[1px] h-12 rounded-lg px-4' />
         </div>
     )
 }

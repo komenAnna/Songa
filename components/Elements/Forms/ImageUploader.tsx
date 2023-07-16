@@ -2,7 +2,7 @@ import React, { useState, ChangeEvent } from 'react';
 import Image from 'next/image';
 
 function ImageUploader({ onImageUpload }: { onImageUpload: (imageData: File) => void }) {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImages, setSelectedImages] = useState<string[]>([]);
 
   const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -10,21 +10,26 @@ function ImageUploader({ onImageUpload }: { onImageUpload: (imageData: File) => 
       const reader = new FileReader();
       reader.onload = () => {
         const imageData = reader.result as string; // Cast the result to string
-        setSelectedImage(imageData);
+        setSelectedImages((prevImages) => [...prevImages, imageData]);
         // onImageUpload(imageData);
       };
       reader.readAsDataURL(file);
     }
   };
-  
 
   return (
     <div className='w-full'>
       <input type="file" accept="image/*" onChange={handleImageUpload} />
-      {selectedImage && (
+      {selectedImages.length > 0 && (
         <div>
-          <h3>Selected Image:</h3>
-          <Image src={selectedImage} alt="Selected" width={100} height={300} />
+          <h3>Selected Images:</h3>
+          <ul>
+            {selectedImages.map((imageData, index) => (
+              <li key={index}>
+                <Image src={imageData} alt={`Selected ${index + 1}`} width={100} height={300} />
+              </li>
+            ))}
+          </ul>
         </div>
       )}
     </div>

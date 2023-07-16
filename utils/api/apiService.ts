@@ -53,3 +53,32 @@ export async function createRiderAccount(data: CreateRiderData): Promise<CustomR
     }
   }
 }
+
+export async function uploadDocuments(files: FormData): Promise<CustomResponse<any>> {
+    // Check if the user has an active session
+    if (!hasSession()) {
+      toast.error('You need to have an account to upload documents.');
+      return { error: 'You need to have an account to upload documents.' };
+    }
+  
+    const endpoint = `${BASE_URL}/api/riders/auth/documents/upload/${localStorage.getItem('userId')}`;
+  
+    const requestOptions: AxiosRequestConfig = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'multipart/form-data', // Important for file uploads
+        'Authorization': `Bearer ${localStorage.getItem('sessionToken')}`, // Attach the session token to the request
+      },
+      data: files,
+    };
+  
+    try {
+      const response = await axios(endpoint, requestOptions);
+      toast.success('Documents uploaded successfully!');
+      return response;
+    } catch (e: any) {
+      // Show a generic error message for any upload errors
+      toast.error('An error occurred while uploading the documents.');
+      return { error: 'An error occurred while uploading the documents.' };
+    }
+  }

@@ -17,7 +17,7 @@ const ProgressSteps: React.FC<ProgressStepsProps> = ({ steps, currentStepIndex }
     <div className="w-full max-w-600px mx-auto px-4 my-20">
       <div className="flex justify-between mt-14 relative step-container">
         <div
-          className="w-full absolute bg-f3e7f3 h-1 top-1/2 transform -translate-y-1/2"
+          className="w-full absolute bg-[#f3e7f3] h-1 top-1/2 transform -translate-y-1/2"
           style={{
             width: '100%',
             zIndex: 1, // Increase z-index to position the line behind the steps

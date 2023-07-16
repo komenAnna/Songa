@@ -3,7 +3,7 @@ import Image from 'next/image'
 const Blog = () => {
   return (
     <div className='w-full h-auto bg-primary'>
-        <div className='pt-20 mx-12'>
+        <div className='pt-20 mx-12 pb-20'>
         <div className="text-center text-white mb-12 text-4xl md:text-start pt-4 md:text-6xl font-bold leading-[91px]">
             <h1>Blog</h1>
         </div>
