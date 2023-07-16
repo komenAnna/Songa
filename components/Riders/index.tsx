@@ -7,6 +7,8 @@ import BikeDetails from './Forms/BikeDetails';
 import RiderDetails from './Forms/RiderDetails';
 import Upload from './Forms/Upload';
 import Preview from './Preview';
+import { createRiderAccount } from '@/utils';
+import { toast } from 'react-toastify';
 
 type FormData = {
   first_name: string;
@@ -40,13 +42,14 @@ const INITIAL_DATA: FormData = {
 
 export default function RegistrationForm() {
   const [data, setData] = useState(INITIAL_DATA);
+  const [isLoading, setIsLoading] = useState(false)
   const { currentStepIndex, step, steps, isFirstStep, isLastStep, goTo, next, back } = useMultistepForm([
     { component: <RiderDetails {...data} updateFields={updateFields} />, step: { number: 1, label: 'Rider Details' } },
     { component: <Upload {...data} updateFields={updateFields} />, step: { number: 2, label: 'Upload' } },
     { component: <BikeDetails {...data} updateFields={updateFields} />, step: { number: 3, label: 'Bike Details' } },
     { component: <Preview {...data} updateFields={updateFields} />, step: { number: 4, label: 'Preview' } },
   ]);
-  
+
 
   function updateFields(fields: Partial<FormData>) {
     setData(prev => {
@@ -54,10 +57,23 @@ export default function RegistrationForm() {
     });
   }
 
-  function onSubmitHandler(e: FormEvent) {
+  async function onSubmitHandler(e: FormEvent) {
     e.preventDefault();
 
-    next();
+    try {
+      await createRiderAccount({
+        first_name: data.first_name,
+        last_name: data.last_name,
+        phone: data.phone_no,
+        password: data.password
+      })
+
+      next();
+    } catch (error) {
+        toast.error('An unknown error occurred!');
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   const progressPercentage = ((currentStepIndex + 1) / steps.length) * 100;
@@ -92,9 +108,10 @@ export default function RegistrationForm() {
           )}
           <button
             type="submit"
+            disabled={isLoading} // Disable the "Next" button when isLoading is true
             className="rounded-lg border-[#FB4552] px-4 py-2 border-2 flex items-center justify-center space-x-3 hover:bg-[#FB4552]"
           >
-            {isLastStep ? 'Finish' : 'Next'}
+            {isLoading ? 'Loading...' : (isLastStep ? 'Finish' : 'Next')}
           </button>
         </div>
       </form>

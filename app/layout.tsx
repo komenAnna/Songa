@@ -1,6 +1,8 @@
 import { NavBar } from '@/components'
 import './globals.css'
 import Footer from '@/components/Elements/Footer'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastProvider } from './toast.provider';
 
 export const metadata = {
   title: 'Songa',
@@ -14,9 +16,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <NavBar />
-        {children}
+      <body suppressHydrationWarning>
+        <ToastProvider>
+          <NavBar />
+          {children}
+        </ToastProvider>
       </body>
       {/* <Footer /> */}
     </html>
