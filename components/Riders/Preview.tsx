@@ -7,8 +7,10 @@ type RiderDetails = {
   password: string;
   confirmPassword: string;
   phone_no: string;
-  id_photo: string;
-  dl_photo: string;
+  id_front_photo: string;
+  id_back_photo: string;
+  dl_front_photo: string;
+  dl_back_photo: string;
   bike_type: string;
   plate_no: string;
   insurance_provider: string;
@@ -52,8 +54,8 @@ export default function Preview({ ...riderDetails }: RiderDetailsProps) {
       <div className="bg-[#222222] text-white p-6 t-4">
         <h1 className="mb-2 text-lg font-semibold">Uploaded Photos</h1>
         <div>
-          <p className="mb-2">ID Photo: {riderDetails.id_photo}</p>
-          <p className="mb-2">Driver&apos;s License Photo: {riderDetails.dl_photo}</p>
+          <p className="mb-2">ID Photo: {riderDetails.id_front_photo}</p>
+          <p className="mb-2">Driver&apos;s License Photo: {riderDetails.dl_front_photo}</p>
         </div>
       </div>
     </FormWrapper>
