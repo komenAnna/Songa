@@ -20,9 +20,9 @@ export default function RootLayout({
         <ToastProvider>
           <NavBar />
           {children}
+          <Footer />
         </ToastProvider>
       </body>
-      {/* <Footer /> */}
     </html>
   )
 }
