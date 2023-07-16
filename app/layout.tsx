@@ -1,10 +1,8 @@
-import { NavBar } from '@/app/components'
+import { NavBar } from '@/components'
 import './globals.css'
-import { useState } from 'react'
-import { Inter } from 'next/font/google'
-import Footer from '@/app/components/Elements/Footer'
-
-const inter = Inter({ subsets: ['latin'] })
+import Footer from '@/components/Elements/Footer'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastProvider } from './toast.provider';
 
 export const metadata = {
   title: 'Songa',
@@ -18,10 +16,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <NavBar />
-        {children}</body>
-        <Footer />
+      <body suppressHydrationWarning>
+        <ToastProvider>
+          <NavBar />
+          {children}
+          <Footer />
+        </ToastProvider>
+      </body>
     </html>
   )
 }
