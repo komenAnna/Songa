@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent } from 'react';
 import Image from 'next/image';
 
-function ImageUploader({ onImageUpload }: { onImageUpload: (imageData: File) => void }) {
+function ImageUploader({require, onImageUpload }: { onImageUpload: (imageData: File) => void , require: boolean }) {
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
 
   const handleImageUpload = (event: ChangeEvent<HTMLInputElement>) => {
@@ -11,7 +11,7 @@ function ImageUploader({ onImageUpload }: { onImageUpload: (imageData: File) => 
       reader.onload = () => {
         const imageData = reader.result as string; // Cast the result to string
         setSelectedImages((prevImages) => [...prevImages, imageData]);
-        // onImageUpload(imageData);
+        onImageUpload(file);
       };
       reader.readAsDataURL(file);
     }
@@ -19,7 +19,7 @@ function ImageUploader({ onImageUpload }: { onImageUpload: (imageData: File) => 
 
   return (
     <div className='w-full'>
-      <input type="file" accept="image/*" onChange={handleImageUpload} />
+      <input type="file" accept="image/*" required={require} onChange={handleImageUpload} />
       {selectedImages.length > 0 && (
         <div>
           <h3>Selected Images:</h3>
