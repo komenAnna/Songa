@@ -74,7 +74,7 @@ export default function Upload({ updateFields, ID_front, ID_back, license_front,
           ) : (
             <ImageUploader require={true} onImageUpload={(file) => handleImageUpload(file, 'ID_front', setIdFrontImage, setIdFrontImageUrl)} />
           )}
-          <span className='whitespace-nowrap'>ID Front: {ID_front?.name}</span>
+          <span className='whitespace-nowrap'><i className='text-[#FB4552]'>*</i> ID Front: {ID_front?.name}</span>
           
         </div>
 
@@ -84,7 +84,7 @@ export default function Upload({ updateFields, ID_front, ID_back, license_front,
           ) : (
             <ImageUploader require={true} onImageUpload={(file) => handleImageUpload(file, 'ID_back', setIdBackImage, setIdBackImageUrl)} />
           )}
-          <span className='whitespace-nowrap'>ID Back: {ID_back?.name} </span>
+          <span className='whitespace-nowrap'><i className='text-[#FB4552]'>*</i> ID Back: {ID_back?.name} </span>
         </div>
 
         <div className="flex items-center gap-2 bg-transparent border-[#FB4552] border-[1px] min-h-[48px] rounded-lg px-4">
