@@ -4,17 +4,17 @@ import ImageUploader from '../../Elements/Forms/ImageUploader';
 import Image from 'next/image';
 
 type RiderDetails = {
-  id_front_photo: string;
-  id_back_photo: string;
-  dl_front_photo: string;
-  dl_back_photo: string;
+  ID_front: File;
+  ID_back: File;
+  license_front: File;
+  license_back: File;
 };
 
 type RiderDetailsProps = RiderDetails & {
   updateFields: (fields: Partial<RiderDetails>) => void;
 };
 
-export default function Upload({ updateFields, id_front_photo, id_back_photo, dl_front_photo, dl_back_photo }: RiderDetailsProps) {
+export default function Upload({ updateFields, ID_front, ID_back, license_front, license_back }: RiderDetailsProps) {
   const [idFrontImage, setIdFrontImage] = useState<File | null>(null);
   const [idBackImage, setIdBackImage] = useState<File | null>(null);
   const [dlFrontImage, setDlFrontImage] = useState<File | null>(null);
@@ -29,7 +29,7 @@ export default function Upload({ updateFields, id_front_photo, id_back_photo, dl
     const renamedFile = new File([imageData], imageName, { type: imageData.type });
     setImage(renamedFile);
     setImageUrl(URL.createObjectURL(renamedFile));
-    updateFields({ [imageName]: renamedFile.name });
+    updateFields({ [imageName]: renamedFile });
   };
 
   useEffect(() => {
@@ -68,41 +68,42 @@ export default function Upload({ updateFields, id_front_photo, id_back_photo, dl
 
   return (
     <FormWrapper title="">
-      <div className="grid grid-cols-2 gap-8">
-        <div className="flex items-center justify-start gap-2">
+        <div className="flex items-center justify-start gap-2 bg-transparent border-[#FB4552] border-[1px] min-h-[48px] rounded-lg px-4">
           {idFrontImage ? (
             <Image src={idFrontImageUrl} alt="ID Front" width={100} height={100} />
           ) : (
-            <ImageUploader onImageUpload={(file) => handleImageUpload(file, 'ID_FRONT.png', setIdFrontImage, setIdFrontImageUrl)} />
+            <ImageUploader require={true} onImageUpload={(file) => handleImageUpload(file, 'ID_front', setIdFrontImage, setIdFrontImageUrl)} />
           )}
-          <span>ID Front: {id_front_photo}</span>
+          <span className='whitespace-nowrap'><i className='text-[#FB4552]'>*</i> ID Front: {ID_front?.name}</span>
+          
         </div>
-        <div className="flex items-center gap-2">
+
+        <div className="flex items-center gap-2 bg-transparent border-[#FB4552] border-[1px] min-h-[48px] rounded-lg px-4">
           {idBackImage ? (
             <Image src={idBackImageUrl} alt="ID Back" width={100} height={100} />
           ) : (
-            <ImageUploader onImageUpload={(file) => handleImageUpload(file, 'ID_BACK.png', setIdBackImage, setIdBackImageUrl)} />
+            <ImageUploader require={true} onImageUpload={(file) => handleImageUpload(file, 'ID_back', setIdBackImage, setIdBackImageUrl)} />
           )}
-          <span>ID Back: {id_back_photo}</span>
+          <span className='whitespace-nowrap'><i className='text-[#FB4552]'>*</i> ID Back: {ID_back?.name} </span>
         </div>
 
-        <div className="flex items-center justify-end gap-2">
+        <div className="flex items-center gap-2 bg-transparent border-[#FB4552] border-[1px] min-h-[48px] rounded-lg px-4">
           {dlFrontImage ? (
             <Image src={dlFrontImageUrl} alt="Driving License Front" width={100} height={100} />
           ) : (
-            <ImageUploader onImageUpload={(file) => handleImageUpload(file, 'DL_FRONT.png', setDlFrontImage, setDlFrontImageUrl)} />
+            <ImageUploader require={false} onImageUpload={(file) => handleImageUpload(file, "license_front", setDlFrontImage, setDlFrontImageUrl)} />
           )}
-          <span>DL Front: {dl_front_photo}</span>
+          <span className='whitespace-nowrap'>DL Front: {license_front?.name}</span>
         </div>
-        <div className="flex items-center gap-2">
+
+        <div className="flex items-center gap-2 bg-transparent border-[#FB4552] border-[1px] min-h-[48px] rounded-lg px-4">
           {dlBackImage ? (
             <Image src={dlBackImageUrl} alt="DL Back" width={100} height={100} />
           ) : (
-            <ImageUploader onImageUpload={(file) => handleImageUpload(file, 'DL_BACK.png', setDlBackImage, setDlBackImageUrl)} />
+            <ImageUploader require={false} onImageUpload={(file) => handleImageUpload(file, "license_back", setDlBackImage, setDlBackImageUrl)} />
           )}
-          <span>DL Back: {dl_back_photo}</span>
+          <span className='whitespace-nowrap'>DL Back: {license_back?.name}</span>
         </div>
-      </div>
     </FormWrapper>
   )
 }

@@ -17,10 +17,10 @@ type FormData = {
   password: string;
   confirmPassword: string;
   phone_no: string;
-  id_front_photo: string;
-  id_back_photo: string;
-  dl_front_photo: string;
-  dl_back_photo: string;
+  ID_front: any;
+  ID_back: any;
+  license_front: any;
+  license_back: any;
   bike_type: string;
   plate_no: string;
   insurance_provider: string;
@@ -33,10 +33,10 @@ const INITIAL_DATA: FormData = {
   password: '',
   confirmPassword: '',
   phone_no: '',
-  id_front_photo: '',
-  id_back_photo: '',
-  dl_front_photo: '',
-  dl_back_photo: '',
+  ID_front: '',
+  ID_back: '',
+  license_front: '',
+  license_back: '',
   bike_type: '',
   plate_no: '',
   insurance_provider: '',
@@ -48,6 +48,7 @@ const INITIAL_DATA: FormData = {
 export default function RegistrationForm() {
   const [data, setData] = useState(INITIAL_DATA);
   const [isLoading, setIsLoading] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const [isuploadComplete, setIsUploadComplete] = useState(false);
   const { currentStepIndex, step, steps, isFirstStep, isLastStep, goTo, next, back } = useMultistepForm([
     { component: <RiderDetails {...data} updateFields={updateFields} />, step: { number: 1, label: 'Rider Details' } },
@@ -56,7 +57,7 @@ export default function RegistrationForm() {
     { component: <Preview {...data} updateFields={updateFields} />, step: { number: 4, label: 'Preview' } },
   ]);
 
-  const showBackButton = !isFirstStep && currentStepIndex !== 1;
+  const showBackButton = !isFirstStep && currentStepIndex !== 0;
 
   function updateFields(fields: Partial<FormData>) {
     setData(prev => {
@@ -77,23 +78,46 @@ export default function RegistrationForm() {
         password: data.password
       })
 
-      // Prepare the FormData for document upload
-      const formData = new FormData();
-      formData.append('id_front_photo', data.id_front_photo);
-      formData.append('id_back_photo', data.id_back_photo);
-      formData.append('dl_front_photo', data.dl_front_photo);
-      formData.append('dl_back_photo', data.dl_back_photo);
 
-      // Upload documents
-      await uploadDocuments(formData);
-
-      setIsUploadComplete(true);
 
       next();
     } catch (error) {
       toast.error('An unknown error occurred!');
     } finally {
       setIsLoading(false);
+    }
+  }
+
+  async function onUploadHandler(e: FormEvent){
+    e.preventDefault();
+
+    try {
+
+      setIsUploading(true);
+      // Prepare the FormData for document upload
+
+      const formData = new FormData();
+      formData.append('images', data.ID_front);
+      formData.append('images', data.ID_back);
+      if(data.license_front) {
+        formData.append('images', data.license_front);
+      }
+      if(data.license_back){
+        formData.append('images', data.license_back);
+      }
+
+      // Upload documents
+      const res = await uploadDocuments(formData);
+      if(res){ //handle success res status
+        setIsUploadComplete(true);
+      }
+
+
+    } catch(e){
+      console.log({e})
+      toast.error('An unknown error occurred!');
+    } finally {
+      setIsUploading(false);
     }
   }
 
@@ -119,14 +143,20 @@ export default function RegistrationForm() {
             </button>
           )}
           {currentStepIndex === 1 && (
+            isLoading? 
+            (
+              <div className="flex items-center justify-center">
+                <ClipLoader color="#FB4552" loading={isLoading} size={35} />
+              </div>
+            ): (
             <button
               type="button"
-              disabled={!isuploadComplete}
-              onClick={() => console.log('Upload button clicked')}
+              disabled={isUploading} //||isuploadComplete
+              onClick={onUploadHandler}
               className="rounded-lg border-[#FB4552] px-4 py-2 border-2 flex items-center justify-center space-x-3 hover:bg-[#FB4552]"
             >
               Upload
-            </button>
+            </button>)
           )}
           {isLoading ? (
             <div className="flex items-center justify-center">
