@@ -10,6 +10,7 @@ import Preview from './Preview';
 import { createRiderAccount, uploadDocuments } from '@/utils';
 import { toast } from 'react-toastify';
 import { ClipLoader } from 'react-spinners';
+import RiderProfile from "@/components/Riders/Forms/RiderProfile";
 
 type FormData = {
   first_name: string;
@@ -17,6 +18,10 @@ type FormData = {
   password: string;
   confirmPassword: string;
   phone_no: string;
+  location: string;
+  stage: string;
+  address: string;
+  gender: string;
   ID_front: any;
   ID_back: any;
   license_front: any;
@@ -33,6 +38,10 @@ const INITIAL_DATA: FormData = {
   password: '',
   confirmPassword: '',
   phone_no: '',
+  location: '',
+  stage: '',
+  address: '',
+  gender: '',
   ID_front: '',
   ID_back: '',
   license_front: '',
@@ -52,9 +61,10 @@ export default function RegistrationForm() {
   const [isuploadComplete, setIsUploadComplete] = useState(false);
   const { currentStepIndex, step, steps, isFirstStep, isLastStep, goTo, next, back } = useMultistepForm([
     { component: <RiderDetails {...data} updateFields={updateFields} />, step: { number: 1, label: 'Rider Details' } },
-    { component: <Upload {...data} updateFields={updateFields} />, step: { number: 2, label: 'Upload' } },
-    { component: <BikeDetails {...data} updateFields={updateFields} />, step: { number: 3, label: 'Bike Details' } },
-    { component: <Preview {...data} updateFields={updateFields} />, step: { number: 4, label: 'Preview' } },
+    { component: <RiderProfile {...data} updateFields={updateFields} />, step: { number: 2, label: 'Profile' } },
+    { component: <Upload {...data} updateFields={updateFields} />, step: { number: 3, label: 'Upload' } },
+    { component: <BikeDetails {...data} updateFields={updateFields} />, step: { number: 4, label: 'Bike Details' } },
+    { component: <Preview {...data} updateFields={updateFields} />, step: { number: 5, label: 'Preview' } },
   ]);
 
   const showBackButton = !isFirstStep && currentStepIndex !== 0;
@@ -124,7 +134,7 @@ export default function RegistrationForm() {
   const progressPercentage = ((currentStepIndex + 1) / steps.length) * 100;
 
   return (
-    <div className="frosted-glass relative text-white py-5 px-3 border-transparent md:mx-20 w-[86vw] bg-primary md:w-auto md:my-10 rounded-lg shadow-md">
+    <div id="rider_reg"  className="frosted-glass relative text-white py-5 px-3 border-transparent md:mx-20 w-[86vw] bg-primary md:w-auto md:my-10 rounded-lg shadow-md">
       <form autoComplete='off' onSubmit={onSubmitHandler} className="p-5">
         {/* Custom Progress Bar */}
         <ProgressSteps steps={steps} currentStepIndex={currentStepIndex} />
