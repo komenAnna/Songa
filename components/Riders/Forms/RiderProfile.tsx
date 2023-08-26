@@ -22,7 +22,7 @@ export default function RiderProfile(
   }: RiderProfileProps
 ) {
   return (
-    <FormWrapper title="">
+    <>
       <FormInput value={location} type={"text"} label={"Location"}
                  required name="location"
                  onChange={(e) => updateFields({ location: e.target.value })} />
@@ -38,6 +38,6 @@ export default function RiderProfile(
 
       } />
 
-    </FormWrapper>
+    </>
   )
 }
