@@ -43,7 +43,7 @@ const ProgressSteps: React.FC<ProgressStepsProps> = ({ steps, currentStepIndex }
             </div>
             <div className="absolute top-14 left-1/2 transform -translate-x-1/2">
               <span
-                className={`text-sm ${index === currentStepIndex ? 'text-white' : 'text-white'}`}
+                className={`text-sm ${index === currentStepIndex ? 'text-white' : 'text-white'} whitespace-nowrap`}
               >
                 {step.label}
               </span>

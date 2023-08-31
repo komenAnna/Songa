@@ -11,6 +11,46 @@ import { createRiderAccount, uploadDocuments } from '@/utils';
 import { toast } from 'react-toastify';
 import { ClipLoader } from 'react-spinners';
 import RiderProfile from "@/components/Riders/Forms/RiderProfile";
+import { FormProvider, useForm } from 'react-hook-form';
+import { TypeOf, object, string } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+
+
+const riderDetailsSchema = object({
+  first_name: string()
+  .min(1, "First name is required"),
+  last_name: string()
+    .min(1, "Last name is required"),
+  phone_no: string()
+    .min(1, "Phone number is required")
+    .min(9, "Phone number must be more than or equal to 9 digits")
+    .regex(
+      /^\d+$/,
+      { message: "Invalid phone number." }
+    ),
+  password: string()
+    .min(1, "Password is required")
+    .min(8, "Password must be more than 8 characters")
+    .max(32, "Password must be less than 32 characters"),
+  confirmPassword: string()
+    .min(1, "Confirm Password is required")
+    .min(8, "Confirm Password must be more than 8 characters")
+    .max(32, "Confirm Password must be less than 32 characters")
+});
+
+const riderProfileSchema = object({
+  location: string()
+    .min(1, "Location is required"),
+  stage: string()
+    .min(1, "Stage is required"),
+  address: string()
+    .min(1, "Address is required"),
+  gender: string()
+    .min(1, "Gender is required")
+})
+
+export type RiderDetailsInput = TypeOf<typeof riderDetailsSchema>;
+export type RiderProfileInput = TypeOf<typeof riderProfileSchema>;
 
 type FormData = {
   first_name: string;
@@ -75,9 +115,13 @@ export default function RegistrationForm() {
     });
   }
 
-  async function onSubmitHandler(e: FormEvent) {
-    e.preventDefault();
 
+
+  async function onSubmitHandler(values: Partial<FormData>) {
+    // e.preventDefault();
+    console.log("Submit profile: ", {currentStepIndex, values})
+    next()
+    return
     try {
       setIsLoading(true);
 
@@ -87,9 +131,6 @@ export default function RegistrationForm() {
         phone: data.phone_no,
         password: data.password
       })
-
-
-
       next();
     } catch (error) {
       toast.error('An unknown error occurred!');
@@ -122,7 +163,6 @@ export default function RegistrationForm() {
         setIsUploadComplete(true);
       }
 
-
     } catch(e){
       console.log({e})
       toast.error('An unknown error occurred!');
@@ -133,56 +173,74 @@ export default function RegistrationForm() {
 
   const progressPercentage = ((currentStepIndex + 1) / steps.length) * 100;
 
+  // let Type = currentStepIndex===1 ? RiderProfileInput : RiderDetailsInput
+
+  let methods = useForm<RiderDetailsInput>({
+    resolver: zodResolver(riderDetailsSchema),
+  });
+
+  // if(currentStepIndex===1){
+  //   methods = useForm<RiderProfileInput>({
+  //     resolver: zodResolver(riderProfileSchema),
+  //   });
+  // } 
+
+  const {
+    reset,
+    handleSubmit,
+    formState: { isSubmitSuccessful },
+  } = methods;
+
   return (
     <div id="rider_reg"  className="frosted-glass relative text-white py-5 px-3 border-transparent md:mx-20 w-[86vw] bg-primary md:w-auto md:my-10 rounded-lg shadow-md">
-      <form autoComplete='off' onSubmit={onSubmitHandler} className="p-5">
-        {/* Custom Progress Bar */}
-        <ProgressSteps steps={steps} currentStepIndex={currentStepIndex} />
-
-        {step}
-
-        {/* Navigation */}
-        <div className="mt-[1rem] flex gap-[.5rem] justify-end">
-          {showBackButton && (
-            <button
+      <FormProvider {...methods}>
+        <form autoComplete='off' onSubmit={handleSubmit(onSubmitHandler)} action="" className="p-5">
+          {/* Custom Progress Bar */}
+          <ProgressSteps steps={steps} currentStepIndex={currentStepIndex} />
+          {step}
+          {/* Navigation */}
+          <div className="mt-[1rem] flex gap-[.5rem] justify-end">
+            {showBackButton && (
+              <button
               type="button"
               onClick={back}
               className="rounded-lg border-[#FB4552] px-4 py-2 border-2 flex items-center justify-center space-x-3 hover:bg-[#FB4552]"
-            >
-              Back
-            </button>
-          )}
-          {currentStepIndex === 1 && (
-            isLoading? 
-            (
+              >
+                Back
+              </button>
+            )}
+            {currentStepIndex === 2 && (
+              isLoading? 
+              (
+                <div className="flex items-center justify-center">
+                  <ClipLoader color="#FB4552" loading={isLoading} size={35} />
+                </div>
+              ): (
+              <button
+                type="button"
+                disabled={isUploading} //||isuploadComplete
+                onClick={onUploadHandler}
+                className="rounded-lg border-[#FB4552] px-4 py-2 border-2 flex items-center justify-center space-x-3 hover:bg-[#FB4552]"
+              >
+                Upload
+              </button>)
+            )}
+            {isLoading ? (
               <div className="flex items-center justify-center">
                 <ClipLoader color="#FB4552" loading={isLoading} size={35} />
               </div>
-            ): (
-            <button
-              type="button"
-              disabled={isUploading} //||isuploadComplete
-              onClick={onUploadHandler}
-              className="rounded-lg border-[#FB4552] px-4 py-2 border-2 flex items-center justify-center space-x-3 hover:bg-[#FB4552]"
-            >
-              Upload
-            </button>)
-          )}
-          {isLoading ? (
-            <div className="flex items-center justify-center">
-              <ClipLoader color="#FB4552" loading={isLoading} size={35} />
-            </div>
-          ) : (
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="rounded-lg border-[#FB4552] px-4 py-2 border-2 flex items-center justify-center space-x-3 hover:bg-[#FB4552]"
-            >
-              {isLastStep ? 'Finish' : 'Next'}
-            </button>
-          )}
-        </div>
-      </form>
+            ) : (
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="rounded-lg border-[#FB4552] px-4 py-2 border-2 flex items-center justify-center space-x-3 hover:bg-[#FB4552]"
+              >
+                {isLastStep ? 'Finish' : 'Next'}
+              </button>
+            )}
+          </div>
+        </form>
+      </FormProvider>
     </div>
   );
 }
