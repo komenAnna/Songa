@@ -6,6 +6,13 @@ import OTPInput from '../../Elements/Forms/OTP/OTPInput';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css'
 import { parsePhoneNumberFromString } from 'libphonenumber-js'
+import { FormProvider, useForm } from 'react-hook-form';
+import { TypeOf, object, string } from 'zod';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ClipLoader } from 'react-spinners';
+import CustomPhoneInput from '@/components/Elements/Forms/PhoneInput';
+import { createRiderAccount } from '@/utils';
+import { toast } from 'react-toastify';
 
 type RiderDetails = {
   first_name: string;
@@ -13,27 +20,64 @@ type RiderDetails = {
   password: string;
   phone_no: string;
   confirmPassword: string;
-  
   // onPhoneChange: (phone: string) => void;
 }
 
-type RiderDetailsProps = RiderDetails & {
-  updateFields: (fields: Partial<RiderDetails>) => void;
+type RiderDetailsPassedProps = {
+  stepNumber: number;
+  stepsCount: number;
 }
 
-export default function RiderDetails({ first_name, last_name, password, phone_no, confirmPassword, updateFields }: RiderDetailsProps) {
-  const [phone, setPhone] = useState(phone_no);
-  const [isInputEnabled, setIsInputEnabled] = useState(false);
-  const [showOTP, setShowOTP] = useState(false);
-  const [otpCode, setOtpCode] = useState<string>("");
-  const [isPinReady, setIsPinReady] = useState(false)
-  const maximumCodeLength = 4;
+type RiderDetailsProps = RiderDetailsPassedProps & {
+  updateFields: (fields: Partial<RiderDetails>) => void;
+  next: () => void;
+  back: () => void;
+}
 
-  const handleVerifyClick = () => {
-    setShowOTP(true);
-  };
+const riderDetailsSchema = object({
+  first_name: string()
+  .min(1, "First name is required"),
+  last_name: string()
+    .min(1, "Last name is required"),
+  phone_no: string()
+    .min(1, "Phone number is required")
+    .min(9, "Phone number must be more than or equal to 9 digits")
+    .regex(
+      /^\d+$/,
+      { message: "Invalid phone number." }
+    ),
+  password: string()
+    .min(1, "Password is required")
+    .min(8, "Password must be more than 8 characters")
+    .max(32, "Password must be less than 32 characters"),
+  confirmPassword: string()
+    .min(1, "Confirm Password is required")
+    .min(8, "Confirm Password must be more than 8 characters")
+    .max(32, "Confirm Password must be less than 32 characters")
+});
 
-  
+export type RiderDetailsInput = TypeOf<typeof riderDetailsSchema>;
+
+const INITIAL_DATA: RiderDetails = {
+  first_name: "",
+  last_name: "",
+  password: "",
+  phone_no: "",
+  confirmPassword: ""
+}
+
+export default function RiderDetails({ stepsCount, stepNumber, updateFields, next, back }: RiderDetailsProps) {
+
+  const [data, setData] = useState(INITIAL_DATA);
+  const [isLoading, setIsLoading] = useState(false);
+  const [phone, setPhone] = useState(data.phone_no);
+
+  function updateData(fields: Partial<RiderDetails>) {
+    setData(prev => {
+      return { ...prev, ...fields };
+    });
+    updateFields(fields)
+  }
 
   const handlePhoneChange = (value: string) => {
     const numericValue = value.replace(/\D/g, ''); // Remove non-numeric characters
@@ -51,63 +95,103 @@ export default function RiderDetails({ first_name, last_name, password, phone_no
       setPhone('');
       updateFields({ phone_no: '' })
     }
-    console.log(phone); // Log the phone number to the console
   };
 
+  async function onSubmitHandler(data: RiderDetails) {
+    try {
+      setIsLoading(true);
+      await createRiderAccount({
+        first_name: data.first_name,
+        last_name: data.last_name,
+        phone: `+${data.phone_no}`,
+        password: data.password
+      });
+      next();
+    } catch (error: any) {
+      if(error&&error.error){
+        toast.error(error.error);
+        if(error.error==="You already have an account."){
+          next();
+        }
+      } else {
+        toast.error('An unknown error occurred!');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  let methods = useForm<RiderDetailsInput>({
+    resolver: zodResolver(riderDetailsSchema),
+  });
+  
+  const {
+    reset,
+    handleSubmit,
+    formState: { isSubmitSuccessful },
+  } = methods;
+
+  const showBackButton = stepNumber && stepNumber !== 1;
+  const isLastStep = stepNumber === stepsCount
 
   return (
-    <FormWrapper title="">
-      <FormInput value={first_name} onChange={(e) => updateFields({ first_name: e.target.value })} label="First Name" type="text" name="f_name" required />
-      <FormInput value={last_name} onChange={(e) => updateFields({ last_name: e.target.value })} label="Last Name" name="l_name" type="text" required />
-      <FormInput value={password} onChange={(e) => updateFields({ password: e.target.value })} label="Password" name="l_name" type="password" required />
-      <FormInput value={confirmPassword} onChange={(e) => updateFields({ confirmPassword: e.target.value })} label="Confirm Password" name="l_name" type="password" required />
-
-      <div className="flex flex-col space-y-3">
-        {/* <label htmlFor="phone">Phone</label> */}
-        <PhoneInput
-          country={'ke'}
-          value={phone}
-          onChange={handlePhoneChange}
-          inputClass='h-12'
-          inputStyle={{
-            width: '100%',
-            borderWidth: 0,
-            backgroundColor: '#222222',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-          containerStyle={{
-            backgroundColor: '#222222',
-          }}
-          dropdownStyle={{
-            backgroundColor: '#222222',
-          }}
-          containerClass='border-2 bg-primary w-full h-12 rounded-lg'
-        />
-
-        {/* <div className='flex justify-between items-center'>
-          {showOTP && (
-            <>
-              <OTPInput
-                code={otpCode}
-                setCode={setOtpCode}
-                maximumLength={maximumCodeLength}
-                setIsPinReady={setIsPinReady}
-              />
-            </>
-          )}
-          <div>
-            <button
-              type="button"
-              className="rounded-lg border-[#FB4552] w-28 h-12 border-2 flex items-center justify-center space-x-3 hover:bg-[#FB4552]"
-              onClick={handleVerifyClick}
-            >
-              Verify
-            </button>
+    <FormProvider {...methods}>
+      <form autoComplete='off' onSubmit={handleSubmit(onSubmitHandler)} action="" className="p-5">
+        <FormWrapper title="">
+          <FormInput value={data.first_name} onChange={(e) => updateData({ first_name: e.target.value })} label="First Name" type="text" name="first_name" />
+          <FormInput value={data.last_name} onChange={(e) => updateData({ last_name: e.target.value })} label="Last Name" name="last_name" type="text" />
+          <FormInput value={data.password} onChange={(e) => updateData({ password: e.target.value })} label="Password" name="password" type="password" />
+          <FormInput value={data.confirmPassword} onChange={(e) => updateData({ confirmPassword: e.target.value })} label="Confirm Password" name="confirmPassword" type="password" />
+          <CustomPhoneInput name="phone_no" defaultValue={phone} handlePhoneChange={handlePhoneChange}/>
+          <div className="flex flex-col gap-1">
+            {/* <div className='flex justify-between items-center'>
+              {showOTP && (
+                <>
+                  <OTPInput
+                    code={otpCode}
+                    setCode={setOtpCode}
+                    maximumLength={maximumCodeLength}
+                    setIsPinReady={setIsPinReady}
+                  />
+                </>
+              )}
+              <div>
+                <button
+                  type="button"
+                  className="rounded-lg border-[#FB4552] w-28 h-12 border-2 flex items-center justify-center space-x-3 hover:bg-[#FB4552]"
+                  onClick={handleVerifyClick}
+                >
+                  Verify
+                </button>
+              </div>
+            </div> */}
           </div>
-        </div> */}
-      </div>
-    </FormWrapper>
+        </FormWrapper>
+       <div className="mt-[1rem] flex gap-[.5rem] justify-end">
+       {showBackButton && (
+         <button
+         type="button"
+         onClick={back}
+         className="rounded-lg border-[#FB4552] px-4 py-2 border-2 flex items-center justify-center space-x-3 hover:bg-[#FB4552]"
+         >
+           Back
+         </button>
+       )}
+       {isLoading ? (
+         <div className="flex items-center justify-center">
+           <ClipLoader color="#FB4552" loading={isLoading} size={35} />
+         </div>
+       ) : (
+         <button
+           type="submit"
+           disabled={isLoading}
+           className="rounded-lg border-[#FB4552] px-4 py-2 border-2 flex items-center justify-center space-x-3 hover:bg-[#FB4552]"
+         >
+           {isLastStep ? 'Finish' : 'Next'}
+         </button>
+       )}
+     </div>
+    </form>
+  </FormProvider>
   );
 }

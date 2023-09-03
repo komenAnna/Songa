@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 /* styles/globals.css */
+html {
+  scroll-behavior: smooth;
+}
+
+html, body {
+  transition: scroll-behavior 300s ease-in-out;
+
+}
 
 body {
   overflow-x: hidden;

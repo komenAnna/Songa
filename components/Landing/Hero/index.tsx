@@ -24,12 +24,12 @@ export const Hero = () => {
                     </p>
                     <div className='flex flex-col gap-y-8  pt-4 md:space-x-12 md:flex-row md:w-full'>
                         <button className='border-none bg-[#009245] px-12 py-[8px] w-[250px] outline-none text-[#ffffff] text-center rounded-lg hover:bg-[#FB4552]'>
-                            <Link href='/'>
+                            <Link href='#rider_reg'>
                                 Become a Rider
                             </Link>
                         </button>
                         <button  className='border border-[#FB4552] bg-transparent px-12 py-[8px] w-[250px] outline-none text-[#ffffff] text-center rounded-lg hover:bg-[#000000]'>
-                            <Link href='/'>
+                            <Link href='#about'>
                                 Learn More
                             </Link>
                         </button>
