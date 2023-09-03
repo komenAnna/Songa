@@ -16,42 +16,6 @@ import { TypeOf, object, string } from 'zod';
 import { zodResolver } from "@hookform/resolvers/zod";
 
 
-const riderDetailsSchema = object({
-  first_name: string()
-  .min(1, "First name is required"),
-  last_name: string()
-    .min(1, "Last name is required"),
-  phone_no: string()
-    .min(1, "Phone number is required")
-    .min(9, "Phone number must be more than or equal to 9 digits")
-    .regex(
-      /^\d+$/,
-      { message: "Invalid phone number." }
-    ),
-  password: string()
-    .min(1, "Password is required")
-    .min(8, "Password must be more than 8 characters")
-    .max(32, "Password must be less than 32 characters"),
-  confirmPassword: string()
-    .min(1, "Confirm Password is required")
-    .min(8, "Confirm Password must be more than 8 characters")
-    .max(32, "Confirm Password must be less than 32 characters")
-});
-
-const riderProfileSchema = object({
-  location: string()
-    .min(1, "Location is required"),
-  stage: string()
-    .min(1, "Stage is required"),
-  address: string()
-    .min(1, "Address is required"),
-  gender: string()
-    .min(1, "Gender is required")
-})
-
-export type RiderDetailsInput = TypeOf<typeof riderDetailsSchema>;
-export type RiderProfileInput = TypeOf<typeof riderProfileSchema>;
-
 type FormData = {
   first_name: string;
   last_name: string;
@@ -96,151 +60,37 @@ const INITIAL_DATA: FormData = {
 
 export default function RegistrationForm() {
   const [data, setData] = useState(INITIAL_DATA);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isUploading, setIsUploading] = useState(false);
-  const [isuploadComplete, setIsUploadComplete] = useState(false);
   const { currentStepIndex, step, steps, isFirstStep, isLastStep, goTo, next, back } = useMultistepForm([
-    { component: <RiderDetails {...data} updateFields={updateFields} />, step: { number: 1, label: 'Rider Details' } },
-    { component: <RiderProfile {...data} updateFields={updateFields} />, step: { number: 2, label: 'Profile' } },
-    { component: <Upload {...data} updateFields={updateFields} />, step: { number: 3, label: 'Upload' } },
-    { component: <BikeDetails {...data} updateFields={updateFields} />, step: { number: 4, label: 'Bike Details' } },
-    { component: <Preview {...data} updateFields={updateFields} />, step: { number: 5, label: 'Preview' } },
+    { component: <RiderDetails stepsCount={5} stepNumber={1} next={goToNext} back={goBack} updateFields={updateFields} />, step: { number: 1, label: 'Rider Details' } },
+    { component: <RiderProfile stepsCount={5} stepNumber={2} next={goToNext} back={goBack} updateFields={updateFields} />, step: { number: 2, label: 'Profile' } },
+    { component: <Upload stepsCount={5} stepNumber={3} next={goToNext} back={goBack}  updateFields={updateFields} />, step: { number: 3, label: 'Upload' } },
+    { component: <BikeDetails stepsCount={5} stepNumber={4} next={goToNext} back={goBack} updateFields={updateFields} />, step: { number: 4, label: 'Bike Details' } },
+    { component: <Preview {...data} stepsCount={5} stepNumber={3} next={goToNext} back={goBack} updateFields={updateFields} />, step: { number: 5, label: 'Preview' } },
   ]);
 
   const showBackButton = !isFirstStep && currentStepIndex !== 0;
-
+  
   function updateFields(fields: Partial<FormData>) {
     setData(prev => {
       return { ...prev, ...fields };
     });
   }
 
-
-
-  async function onSubmitHandler(values: Partial<FormData>) {
-    // e.preventDefault();
-    console.log("Submit profile: ", {currentStepIndex, values})
+  function goToNext(){
     next()
-    return
-    try {
-      setIsLoading(true);
-
-      await createRiderAccount({
-        first_name: data.first_name,
-        last_name: data.last_name,
-        phone: data.phone_no,
-        password: data.password
-      })
-      next();
-    } catch (error) {
-      toast.error('An unknown error occurred!');
-    } finally {
-      setIsLoading(false);
-    }
   }
 
-  async function onUploadHandler(e: FormEvent){
-    e.preventDefault();
-
-    try {
-
-      setIsUploading(true);
-      // Prepare the FormData for document upload
-
-      const formData = new FormData();
-      formData.append('images', data.ID_front);
-      formData.append('images', data.ID_back);
-      if(data.license_front) {
-        formData.append('images', data.license_front);
-      }
-      if(data.license_back){
-        formData.append('images', data.license_back);
-      }
-
-      // Upload documents
-      const res = await uploadDocuments(formData);
-      if(res){ //handle success res status
-        setIsUploadComplete(true);
-      }
-
-    } catch(e){
-      console.log({e})
-      toast.error('An unknown error occurred!');
-    } finally {
-      setIsUploading(false);
-    }
+  function goBack(){
+    back()
   }
 
   const progressPercentage = ((currentStepIndex + 1) / steps.length) * 100;
 
-  // let Type = currentStepIndex===1 ? RiderProfileInput : RiderDetailsInput
-
-  let methods = useForm<RiderDetailsInput>({
-    resolver: zodResolver(riderDetailsSchema),
-  });
-
-  // if(currentStepIndex===1){
-  //   methods = useForm<RiderProfileInput>({
-  //     resolver: zodResolver(riderProfileSchema),
-  //   });
-  // } 
-
-  const {
-    reset,
-    handleSubmit,
-    formState: { isSubmitSuccessful },
-  } = methods;
-
   return (
     <div id="rider_reg"  className="frosted-glass relative text-white py-5 px-3 border-transparent md:mx-20 w-[86vw] bg-primary md:w-auto md:my-10 rounded-lg shadow-md">
-      <FormProvider {...methods}>
-        <form autoComplete='off' onSubmit={handleSubmit(onSubmitHandler)} action="" className="p-5">
-          {/* Custom Progress Bar */}
-          <ProgressSteps steps={steps} currentStepIndex={currentStepIndex} />
-          {step}
-          {/* Navigation */}
-          <div className="mt-[1rem] flex gap-[.5rem] justify-end">
-            {showBackButton && (
-              <button
-              type="button"
-              onClick={back}
-              className="rounded-lg border-[#FB4552] px-4 py-2 border-2 flex items-center justify-center space-x-3 hover:bg-[#FB4552]"
-              >
-                Back
-              </button>
-            )}
-            {currentStepIndex === 2 && (
-              isLoading? 
-              (
-                <div className="flex items-center justify-center">
-                  <ClipLoader color="#FB4552" loading={isLoading} size={35} />
-                </div>
-              ): (
-              <button
-                type="button"
-                disabled={isUploading} //||isuploadComplete
-                onClick={onUploadHandler}
-                className="rounded-lg border-[#FB4552] px-4 py-2 border-2 flex items-center justify-center space-x-3 hover:bg-[#FB4552]"
-              >
-                Upload
-              </button>)
-            )}
-            {isLoading ? (
-              <div className="flex items-center justify-center">
-                <ClipLoader color="#FB4552" loading={isLoading} size={35} />
-              </div>
-            ) : (
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="rounded-lg border-[#FB4552] px-4 py-2 border-2 flex items-center justify-center space-x-3 hover:bg-[#FB4552]"
-              >
-                {isLastStep ? 'Finish' : 'Next'}
-              </button>
-            )}
-          </div>
-        </form>
-      </FormProvider>
+      {/* Custom Progress Bar */}
+      <ProgressSteps steps={steps} currentStepIndex={currentStepIndex} />
+      {step}
     </div>
   );
 }
