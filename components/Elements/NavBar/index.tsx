@@ -41,7 +41,7 @@ export const NavBar = () => {
   const [nav, setNav] = useState(false)
   const handleClick = () => setNav(!nav)
   return (
-    <div className='text-white text-lg h-auto min-w-full drop-shadow-lg absolute z-10 px-10'>
+    <div className='top-0 text-white text-lg h-auto min-w-full drop-shadow-lg absolute z-10 px-10'>
       <div className="border-b-[1px] border-white/20">
         <div className='flex items-center justify-between '>
           <div>
