@@ -18,6 +18,7 @@ const riderProfileSchema = object({
     .min(1, "Address is required"),
   gender: string()
     .min(1, "Gender is required")
+    .max(1, "Gender can either be M or F")
 })
 
 export type RiderProfileInput = TypeOf<typeof riderProfileSchema>;
@@ -112,9 +113,10 @@ export default function RiderProfile({ stepsCount, stepNumber, updateFields, nex
             label={"Gender"} 
             type={"text"} 
             name={"gender"} 
+            placeholder="M or F"
             required={false} 
             value={data.gender}  
-            onChange={(e) => updateData({ gender: e.target.value })}  
+            onChange={(e) => updateData({ gender: e.target.value.toUpperCase() })}  
           />
 
         </div>
