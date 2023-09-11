@@ -40,8 +40,6 @@ export async function createRiderAccount(data: CreateRiderData): Promise<CustomR
     const sessionToken = response.data.rider.sessionToken;
     const userId = response.data.rider.id;
 
-    console.log("Res: ", response.data)
-
     localStorage.setItem('sessionToken', sessionToken);
     localStorage.setItem('userId', userId);
 
@@ -66,7 +64,8 @@ export async function createRiderProfile(data: CreateRiderProfile): Promise<Cust
    if (!hasSession()) {
     throw { error: 'You need to have an account to upload documents.' };
   }
-  const endpoint = `${BASE_URL}/api/riders/profile/create-profile/${ localStorage.getItem('userId')}`;
+  const endpoint = `${BASE_URL}/api/riders/profile/create-profile`;
+  // const endpoint = `${BASE_URL}/api/riders/profile/create-profile/${ localStorage.getItem('userId')}`;
   const requestOptions: AxiosRequestConfig = {
     method: 'POST',
     headers: {
@@ -93,7 +92,7 @@ export async function createBikeDetails(data: BikeDetails): Promise<CustomRespon
    if (!hasSession()) {
     throw { error: 'You need to have an account to upload documents.' };
   }
-  const endpoint = `${BASE_URL}/api/riders/profile/add-bike-info/${ localStorage.getItem('userId')}`;
+  const endpoint = `${BASE_URL}/api/riders/profile/add-bike-info`;
   const requestOptions: AxiosRequestConfig = {
     method: 'POST',
     headers: {
@@ -121,7 +120,7 @@ export async function uploadDocuments(files: FormData): Promise<CustomResponse<a
     if (!hasSession()) {
       throw { error: 'You need to have an account to upload documents.' };
     }
-    const endpoint = `${BASE_URL}/api/riders/documents/upload/${ localStorage.getItem('userId')}`;
+    const endpoint = `${BASE_URL}/api/riders/documents/upload`;
     const requestOptions: AxiosRequestConfig = {
       method: 'POST',
       maxBodyLength: Infinity,
