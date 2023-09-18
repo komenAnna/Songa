@@ -1,22 +1,50 @@
+"use client"
 import Image from 'next/image'
 import React from 'react'
 import Link from 'next/link';
-import { ArrowSmallRightIcon } from '@heroicons/react/24/solid'
-import "react-responsive-carousel/lib/styles/carousel.min.css"
-import { Carousel } from 'react-responsive-carousel';
+import { useState } from 'react';
+import { AiOutlineRight, AiOutlineLeft } from 'react-icons/ai'
+
+
+const sliderImages = [
+    "/assets/images/Songa-slide-1.jpeg",
+    "/assets/images/Songa-slide-2.jpeg",
+    "/assets/images/Songa-slide-3.jpeg",
+    "/assets/images/Songa-slide-4.jpeg",
+    "/assets/images/Songa-slide-5.jpeg",
+    
+]
+
 
 export const Hero = () => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const prevSlide = () => {
+        const isFirstSlide = currentIndex === 0;
+        const newIndex = isFirstSlide ? sliderImages.length - 1 : currentIndex - 1;
+        console.log("previous lide: ", newIndex);
+        setCurrentIndex(newIndex);
+    };
+
+    const nextSlide = () => {
+        const isLastSlide = currentIndex === sliderImages.length - 1;
+        const newIndex = isLastSlide ? 0 : currentIndex + 1;
+        setCurrentIndex(newIndex);
+    };
+
+    
     return (
         <div className='relative h-[100vh] w-screen'>
-            <div className=''>
-                <Image
-                src='/assets/images/bg-image.png'
+             <div className='group'>
+            <Image
+                src={sliderImages[currentIndex]}
                 alt='Hero Image'
                 fill={true}
                 className="object-cover md:object-fill h-[80vh] absolute z-0 left-0"
                 />
             </div>
-            <div className="w-full h-full flex flex-col justify-center items-center backdrop-brightness-50 absolute z-2">
+            
+            <div className="w-full h-full flex flex-col justify-center items-center backdrop-brightness-50 absolute z-0">
                 <span className="text-white w-full mx-12 px-12 md:pl-20">
                    <h1 className='text-2xl md:text-5xl font-bold'>DIGITIZING THE BODA BODA INDUSTRY.</h1>
                    <p className="text-[#ffffff] font-light text-lg my-8 md:w-[611px]">
@@ -36,6 +64,17 @@ export const Hero = () => {
                     </div>
                 </span>       
             </div>
+            <div>
+                {/* Left Arrow */}
+            <div className='z-1 absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+                <AiOutlineLeft onClick={prevSlide} size={30} />
+            </div>
+            {/* Right Arrow */}
+            <div className='z-1 absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+                <AiOutlineRight onClick={nextSlide} size={30} />
+            </div>
+            </div>
+            
         </div>
     );
 };

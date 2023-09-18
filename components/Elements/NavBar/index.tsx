@@ -44,12 +44,13 @@ export const NavBar = () => {
     <div className='top-0 text-white text-lg h-auto min-w-full drop-shadow-lg absolute z-10 px-10'>
       <div className="border-b-[1px] border-white/20">
         <div className='flex items-center justify-between '>
-          <div>
+          <div className=''>
             <Image
               src='/assets/icons/SONGA-red-logo.png'
               alt='Songa Logo'
-              width={167}
-              height={150}
+              width={125}
+              height={100}
+              priority
             />
           </div>
 
